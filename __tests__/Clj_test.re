@@ -45,6 +45,18 @@ let () =
             () => expect([||] |> Clj.Array.rest) |> toEqual(None)
           )
         }
+      );
+      describe(
+        "cons",
+        () =>
+          test(
+            "should return a new array with an item at the front",
+            {
+              () => expect([||] |> Clj.Array.cons(1)) |> toEqual([|1|]);
+              () =>
+                expect([|"b"|] |> Clj.Array.cons("a")) |> toEqual([|"a", "b"|])
+            }
+          )
       )
     }
   );

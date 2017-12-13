@@ -10,4 +10,5 @@ module Array = {
     | 1 => None
     | _ => Some(Array.sub(array, 1, Array.length(array) - 1))
     };
+  let cons = (item, array) => Array.append([|item|], array);
 };
