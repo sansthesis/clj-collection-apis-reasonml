@@ -22,4 +22,16 @@ module Array = {
       [||],
       array
     );
+  /*let distinct = (array) => [||];*/
+  let remove = (predicate, array) =>
+    Array.fold_left(
+      (acc, item) =>
+        if (predicate(item)) {
+          acc
+        } else {
+          Array.append(acc, [|item|])
+        },
+      [||],
+      array
+    );
 };

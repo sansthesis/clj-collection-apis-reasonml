@@ -82,6 +82,41 @@ let () =
             }
           )
         }
+      );
+      /*describe(
+          "distinct",
+          () => {
+            test(
+              "should return an empty array when given an empty array",
+              () => expect([||] |> Clj.Array.distinct) |> toEqual([||])
+            );
+            test(
+              "should return an array with no duplicate elements",
+              () =>
+                expect([|1, 2, 1, 1, 2, 3|] |> Clj.Array.distinct)
+                |> toEqual([|1, 2, 3|])
+            )
+          }
+        )*/
+      describe(
+        "remove",
+        () => {
+          let even = (a) => a mod 2 == 0;
+          test(
+            "should return an empty array when given an empty array",
+            () => expect([||] |> Clj.Array.remove(even)) |> toEqual([||])
+          );
+          test(
+            "should return an empty array when no elements match",
+            () => expect([|2|] |> Clj.Array.remove(even)) |> toEqual([||])
+          );
+          test(
+            "should return an array with only elements that don't match",
+            () =>
+              expect([|2, 1, 3, 4|] |> Clj.Array.remove(even))
+              |> toEqual([|1, 3|])
+          )
+        }
       )
     }
   );
