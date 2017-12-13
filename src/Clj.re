@@ -63,4 +63,16 @@ module Array = {
         );
       Array.sub(fencepost, 0, Array.length(fencepost) - 1)
     };
+  let drop = (n, array) =>
+    Array.fold_left(
+      (acc, item) =>
+        if (fst(acc) > 0) {
+          (fst(acc) - 1, snd(acc))
+        } else {
+          (0, Array.append(snd(acc), [|item|]))
+        },
+      (n, [||]),
+      array
+    )
+    |> snd;
 };

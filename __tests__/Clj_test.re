@@ -182,6 +182,24 @@ let () =
               |> toEqual([|0, 1, 2|])
           )
         }
+      );
+      describe(
+        "drop",
+        () => {
+          test(
+            "should return an empty array when given an empty array",
+            () => expect([||] |> Clj.Array.drop(1)) |> toEqual([||])
+          );
+          test(
+            "should return an empty array when dropping more than it has",
+            () => expect([|1|] |> Clj.Array.drop(10)) |> toEqual([||])
+          );
+          test(
+            "should remove the first N elements",
+            () =>
+              expect([|1, 2, 3, 4|] |> Clj.Array.drop(2)) |> toEqual([|3, 4|])
+          )
+        }
       )
     }
   );
