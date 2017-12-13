@@ -1,0 +1,23 @@
+{
+  "name": "clj-collection-apis-reasonml",
+  "version": "0.1.0",
+  "scripts": {
+    "build": "bsb -make-world",
+    "start": "bsb -make-world -w",
+    "clean": "bsb -clean-world",
+    "pretest": "npm run build",
+    "test": "jest"
+  },
+  "keywords": [
+    "BuckleScript",
+    "Clojurescript",
+    "Reason",
+    "ReasonML"
+  ],
+  "author": "Jason Rose",
+  "license": "MIT",
+  "devDependencies": {
+    "bs-jest": "0.2.0",
+    "bs-platform": "2.1.0"
+  }
+}

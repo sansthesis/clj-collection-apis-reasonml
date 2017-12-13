@@ -57,3 +57,10 @@ typings/
 # dotenv environment variables file
 .env
 
+.DS_Store
+.merlin
+.bsb.lock
+npm-debug.log
+/lib/bs/
+/node_modules/
+lib/
