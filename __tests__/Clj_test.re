@@ -28,21 +28,45 @@ let () =
           test(
             "should return an array of all elements after the first",
             () => {
-              expect([|1, 2|] |> Clj.Array.rest) |> toEqual(Some([|2|]));
+              expect([|1, 2|] |> Clj.Array.rest) |> toEqual([|2|]);
               expect([|"a", "b", "c"|] |> Clj.Array.rest)
+              |> toEqual([|"b", "c"|])
+            }
+          );
+          test(
+            "should return an empty array for an array with one element",
+            () => {
+              expect([|1|] |> Clj.Array.rest) |> toEqual([||]);
+              expect([|"a"|] |> Clj.Array.rest) |> toEqual([||])
+            }
+          );
+          test(
+            "should return an empty array for an empty array",
+            () => expect([||] |> Clj.Array.rest) |> toEqual([||])
+          )
+        }
+      );
+      describe(
+        "next",
+        () => {
+          test(
+            "should return an array of all elements after the first",
+            () => {
+              expect([|1, 2|] |> Clj.Array.next) |> toEqual(Some([|2|]));
+              expect([|"a", "b", "c"|] |> Clj.Array.next)
               |> toEqual(Some([|"b", "c"|]))
             }
           );
           test(
             "should return None for an array with one element",
             () => {
-              expect([|1|] |> Clj.Array.rest) |> toEqual(None);
-              expect([|"a"|] |> Clj.Array.rest) |> toEqual(None)
+              expect([|1|] |> Clj.Array.next) |> toEqual(None);
+              expect([|"a"|] |> Clj.Array.next) |> toEqual(None)
             }
           );
           test(
             "should return None for an empty array",
-            () => expect([||] |> Clj.Array.rest) |> toEqual(None)
+            () => expect([||] |> Clj.Array.next) |> toEqual(None)
           )
         }
       );

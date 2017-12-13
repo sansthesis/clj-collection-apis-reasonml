@@ -6,6 +6,12 @@ module Array = {
     };
   let rest = (array) =>
     switch (Array.length(array)) {
+    | 0 => [||]
+    | 1 => [||]
+    | _ => Array.sub(array, 1, Array.length(array) - 1)
+    };
+  let next = (array) =>
+    switch (Array.length(array)) {
     | 0 => None
     | 1 => None
     | _ => Some(Array.sub(array, 1, Array.length(array) - 1))
