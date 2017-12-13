@@ -1,18 +1,5 @@
-# Basic Reason Template
+# Clojure Collection APIs in Reason
 
-Hello! This project allows you to quickly get started with Reason and BuckleScript. If you wanted a more sophisticated version, try the `react` template (`bsb -theme react -init .`).
+This project aims to implement the Clojure collection APIs for Reason's Array and List types whenever they make sense.
 
-# Build
-```
-npm run build
-```
-
-# Build + Watch
-
-```
-npm run watch
-```
-
-
-# Editor
-If you use `vscode`, Press `Windows + Shift + B` it will build automatically
+Reference the unit tests for examples on usage.
