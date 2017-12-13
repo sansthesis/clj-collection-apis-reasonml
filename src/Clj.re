@@ -34,4 +34,14 @@ module Array = {
       [||],
       array
     );
+  let keep = (f, array) =>
+    Array.fold_left(
+      (acc, item) =>
+        switch (f(item)) {
+        | Some(value) => Array.append(acc, [|value|])
+        | None => acc
+        },
+      [||],
+      array
+    );
 };

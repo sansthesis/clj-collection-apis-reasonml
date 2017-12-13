@@ -117,6 +117,32 @@ let () =
               |> toEqual([|1, 3|])
           )
         }
+      );
+      describe(
+        "keep",
+        () => {
+          let contrived = (number) =>
+            if (number mod 2 == 0) {
+              Some(number + 10)
+            } else {
+              None
+            };
+          test(
+            "should return an empty array when given an empty array",
+            () => expect([||] |> Clj.Array.keep(contrived)) |> toEqual([||])
+          );
+          test(
+            "should remove all values that the fn returns None for",
+            () =>
+              expect([|1, 3, 5|] |> Clj.Array.keep(contrived)) |> toEqual([||])
+          );
+          test(
+            "should retain values that the fn returns Some(value) for",
+            () =>
+              expect([|2, 1, 4, 6, 3, 5, 8|] |> Clj.Array.keep(contrived))
+              |> toEqual([|12, 14, 16, 18|])
+          )
+        }
       )
     }
   );
