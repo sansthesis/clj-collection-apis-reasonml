@@ -51,12 +51,37 @@ let () =
         () =>
           test(
             "should return a new array with an item at the front",
-            {
-              () => expect([||] |> Clj.Array.cons(1)) |> toEqual([|1|]);
-              () =>
-                expect([|"b"|] |> Clj.Array.cons("a")) |> toEqual([|"a", "b"|])
+            () => {
+              expect([||] |> Clj.Array.cons(1)) |> toEqual([|1|]);
+              expect([|"b"|] |> Clj.Array.cons("a")) |> toEqual([|"a", "b"|])
             }
           )
+      );
+      describe(
+        "filter",
+        () => {
+          let even = (a) => a mod 2 == 0;
+          test(
+            "should return an empty array when given an empty array",
+            () => expect([||] |> Clj.Array.filter(even)) |> toEqual([||])
+          );
+          test(
+            "should return an empty array when no elements match",
+            () => expect([|1|] |> Clj.Array.filter(even)) |> toEqual([||])
+          );
+          test(
+            "should return an array with only elements that match",
+            () => {
+              expect([|2, 1, 3, 4|] |> Clj.Array.filter(even))
+              |> toEqual([|2, 4|]);
+              expect(
+                [|"a", "b", "a", "c"|]
+                |> Clj.Array.filter((letter) => letter == "a")
+              )
+              |> toEqual([|"a", "a"|])
+            }
+          )
+        }
       )
     }
   );

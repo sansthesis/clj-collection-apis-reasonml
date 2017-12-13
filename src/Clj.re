@@ -11,4 +11,15 @@ module Array = {
     | _ => Some(Array.sub(array, 1, Array.length(array) - 1))
     };
   let cons = (item, array) => Array.append([|item|], array);
+  let filter = (predicate, array) =>
+    Array.fold_left(
+      (acc, item) =>
+        if (predicate(item)) {
+          Array.append(acc, [|item|])
+        } else {
+          acc
+        },
+      [||],
+      array
+    );
 };
