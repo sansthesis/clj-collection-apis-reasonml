@@ -44,4 +44,17 @@ module Array = {
       [||],
       array
     );
+  let interpose = (delimiter, array) =>
+    switch (Array.length(array)) {
+    | 0 => [||]
+    | 1 => array
+    | _ =>
+      let fencepost =
+        Array.fold_left(
+          (acc, item) => Array.append(acc, [|item, delimiter|]),
+          [||],
+          array
+        );
+      Array.sub(fencepost, 0, Array.length(fencepost) - 1)
+    };
 };

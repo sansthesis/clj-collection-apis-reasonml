@@ -143,6 +143,21 @@ let () =
               |> toEqual([|12, 14, 16, 18|])
           )
         }
+      );
+      describe(
+        "interpose",
+        () => {
+          test(
+            "should return an empty array when given an empty array",
+            () => expect([||] |> Clj.Array.interpose(1)) |> toEqual([||])
+          );
+          test(
+            "should insert the delimiter between elements",
+            () =>
+              expect([|0, 2|] |> Clj.Array.interpose(1))
+              |> toEqual([|0, 1, 2|])
+          )
+        }
       )
     }
   );
