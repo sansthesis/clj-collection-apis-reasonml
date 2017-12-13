@@ -5,7 +5,7 @@ open Expect;
 let () =
   describe(
     "Clj.Array",
-    () =>
+    () => {
       describe(
         "first",
         () => {
@@ -21,5 +21,30 @@ let () =
             () => expect([||] |> Clj.Array.first) |> toEqual(None)
           )
         }
+      );
+      describe(
+        "rest",
+        () => {
+          test(
+            "should return an array of all elements after the first",
+            () => {
+              expect([|1, 2|] |> Clj.Array.rest) |> toEqual(Some([|2|]));
+              expect([|"a", "b", "c"|] |> Clj.Array.rest)
+              |> toEqual(Some([|"b", "c"|]))
+            }
+          );
+          test(
+            "should return None for an array with one element",
+            () => {
+              expect([|1|] |> Clj.Array.rest) |> toEqual(None);
+              expect([|"a"|] |> Clj.Array.rest) |> toEqual(None)
+            }
+          );
+          test(
+            "should return None for an empty array",
+            () => expect([||] |> Clj.Array.rest) |> toEqual(None)
+          )
+        }
       )
+    }
   );
