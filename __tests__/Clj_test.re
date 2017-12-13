@@ -2,6 +2,8 @@ open Jest;
 
 open Expect;
 
+let even = (a) => a mod 2 == 0;
+
 let () =
   describe(
     "Clj.Array",
@@ -84,7 +86,6 @@ let () =
       describe(
         "filter",
         () => {
-          let even = (a) => a mod 2 == 0;
           test(
             "should return an empty array when given an empty array",
             () => expect([||] |> Clj.Array.filter(even)) |> toEqual([||])
@@ -125,7 +126,6 @@ let () =
       describe(
         "remove",
         () => {
-          let even = (a) => a mod 2 == 0;
           test(
             "should return an empty array when given an empty array",
             () => expect([||] |> Clj.Array.remove(even)) |> toEqual([||])
@@ -198,6 +198,27 @@ let () =
             "should remove the first N elements",
             () =>
               expect([|1, 2, 3, 4|] |> Clj.Array.drop(2)) |> toEqual([|3, 4|])
+          )
+        }
+      );
+      describe(
+        "dropWhile",
+        () => {
+          test(
+            "should return an empty array when given an empty array",
+            () => expect([||] |> Clj.Array.dropWhile(even)) |> toEqual([||])
+          );
+          test(
+            "should return the source array when the first result is false",
+            () =>
+              expect([|1, 2|] |> Clj.Array.dropWhile(even))
+              |> toEqual([|1, 2|])
+          );
+          test(
+            "should return the suffix of array starting at the index of the first false result",
+            () =>
+              expect([|4, 2, 1, 2, 3|] |> Clj.Array.dropWhile(even))
+              |> toEqual([|1, 2, 3|])
           )
         }
       )

@@ -75,4 +75,16 @@ module Array = {
       array
     )
     |> snd;
+  let dropWhile = (predicate, array) =>
+    Array.fold_left(
+      (acc, item) =>
+        if (fst(acc) && predicate(item)) {
+          (fst(acc), snd(acc))
+        } else {
+          (false, Array.append(snd(acc), [|item|]))
+        },
+      (true, [||]),
+      array
+    )
+    |> snd;
 };

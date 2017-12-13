@@ -14,8 +14,10 @@
     "Reason",
     "ReasonML"
   ],
-  "author": "Jason Rose",
+  "main": "lib/js/src/Clj.js",
+  "author": "Jason Rose <jasoncrose@gmail.com>",
   "license": "MIT",
+  "repository": "jasonrose/clj-collection-apis-reasonml",
   "devDependencies": {
     "bs-jest": "0.2.0",
     "bs-platform": "2.1.0"
