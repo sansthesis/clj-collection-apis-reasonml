@@ -353,6 +353,45 @@ let () =
             }
           )
         }
+      );
+      describe(
+        "splitAt",
+        () => {
+          test(
+            "should return an array of two empty arrays when given an empty array",
+            () => {
+              expect([||] |> Clj_array.splitAt(0))
+              |> toEqual([|[||], [||]|])
+              |> ignore;
+              expect([||] |> Clj_array.splitAt(10)) |> toEqual([|[||], [||]|])
+            }
+          );
+          test(
+            "should put everything into the first array if splitting at a number higher than the array's length",
+            () =>
+              expect([|1, 2, 3|] |> Clj_array.splitAt(10))
+              |> toEqual([|[|1, 2, 3|], [||]|])
+          );
+          test(
+            "should put everything into the second array if splitting at 0",
+            () =>
+              expect([|1, 2, 3|] |> Clj_array.splitAt(0))
+              |> toEqual([|[||], [|1, 2, 3|]|])
+          );
+          test(
+            "should partition the array at the specified index",
+            () => {
+              expect([|1, 2, 3|] |> Clj_array.splitAt(1))
+              |> toEqual([|[|1|], [|2, 3|]|])
+              |> ignore;
+              expect([|1, 2, 3|] |> Clj_array.splitAt(2))
+              |> toEqual([|[|1, 2|], [|3|]|])
+              |> ignore;
+              expect([|1, 2, 3, 4|] |> Clj_array.splitAt(2))
+              |> toEqual([|[|1, 2|], [|3, 4|]|])
+            }
+          )
+        }
       )
     }
   );

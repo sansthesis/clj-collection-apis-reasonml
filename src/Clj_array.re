@@ -179,3 +179,5 @@ let reverse = (array) => {
     array
   }
 };
+
+let splitAt = (index, array) => [|take(index, array), drop(index, array)|];
