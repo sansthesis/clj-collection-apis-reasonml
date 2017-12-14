@@ -330,6 +330,29 @@ let () =
               |> toEqual([|1, 2, 3|])
           )
         }
+      );
+      describe(
+        "reverse",
+        () => {
+          test(
+            "should return an empty array when given an empty array",
+            () => expect([||] |> Clj_array.reverse) |> toEqual([||])
+          );
+          test(
+            "should return the source array when given an array of 1 element",
+            () => expect([|1|] |> Clj_array.reverse) |> toEqual([|1|])
+          );
+          test(
+            "should return an array in reverse order of the original",
+            () => {
+              expect([|1, 2|] |> Clj_array.reverse)
+              |> toEqual([|2, 1|])
+              |> ignore;
+              expect([|1, 2, 3, 4, 5|] |> Clj_array.reverse)
+              |> toEqual([|5, 4, 3, 2, 1|])
+            }
+          )
+        }
       )
     }
   );

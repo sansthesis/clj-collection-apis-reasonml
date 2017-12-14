@@ -165,3 +165,17 @@ let dropLast = (n, array) => {
     Array.sub(array, 0, remainder)
   }
 };
+
+let reverse = (array) => {
+  let length = Array.length(array) - 1;
+  if (length > 0) {
+    for (i in 0 to length / 2) {
+      let swap = array[length - i];
+      array[length - i] = array[i];
+      array[i] = swap
+    };
+    array
+  } else {
+    array
+  }
+};
