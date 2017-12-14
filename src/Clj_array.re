@@ -149,3 +149,10 @@ let takeWhile = (predicate, array) =>
     array
   )
   |> snd;
+
+let butLast = (array) =>
+  switch (Array.length(array)) {
+  | 0 => None
+  | 1 => None
+  | _ => Some(Array.sub(array, 0, Array.length(array) - 1))
+  };

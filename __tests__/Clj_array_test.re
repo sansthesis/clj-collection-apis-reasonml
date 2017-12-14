@@ -287,6 +287,25 @@ let () =
               |> toEqual([|2, 4, 6|])
           )
         }
+      );
+      describe(
+        "butLast",
+        () => {
+          test(
+            "should return None when given an empty array",
+            () => expect([||] |> Clj_array.butLast) |> toEqual(None)
+          );
+          test(
+            "should return None when given an array with one element",
+            () => expect([|1|] |> Clj_array.butLast) |> toEqual(None)
+          );
+          test(
+            "should return an array of every element but the last in it",
+            () =>
+              expect([|1, 2, 3|] |> Clj_array.butLast)
+              |> toEqual(Some([|1, 2|]))
+          )
+        }
       )
     }
   );
