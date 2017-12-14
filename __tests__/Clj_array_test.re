@@ -242,6 +242,31 @@ let () =
               expect([|1, 2, 3, 4|] |> Clj_array.take(2)) |> toEqual([|1, 2|])
           )
         }
+      );
+      describe(
+        "takeNth",
+        () => {
+          test(
+            "should return an empty array when given an empty array",
+            () => expect([||] |> Clj_array.takeNth(2)) |> toEqual([||])
+          );
+          test(
+            "should return the source array when N is 1",
+            () =>
+              expect([|1, 2, 3|] |> Clj_array.takeNth(1))
+              |> toEqual([|1, 2, 3|])
+          );
+          test(
+            "should return every Nth item in the array",
+            () => {
+              expect([|1, 2, 3, 4, 5, 6, 7|] |> Clj_array.takeNth(3))
+              |> toEqual([|1, 4, 7|])
+              |> ignore;
+              expect([|1, 2, 3, 4, 5, 6|] |> Clj_array.takeNth(3))
+              |> toEqual([|1, 4|])
+            }
+          )
+        }
       )
     }
   );

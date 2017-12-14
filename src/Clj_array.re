@@ -123,3 +123,16 @@ let take = (n, array) =>
     array
   )
   |> snd;
+
+let takeNth = (n, array) =>
+  Array.fold_left(
+    (acc, item) =>
+      if (fst(acc) mod n == 0) {
+        (fst(acc) + 1, Array.append(snd(acc), [|item|]))
+      } else {
+        (fst(acc) + 1, snd(acc))
+      },
+    (n, [||]),
+    array
+  )
+  |> snd;
