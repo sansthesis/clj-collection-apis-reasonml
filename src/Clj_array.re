@@ -186,3 +186,20 @@ let splitWith = (predicate, array) => [|
   takeWhile(predicate, array),
   dropWhile(predicate, array)
 |];
+
+let partition = (n, array) =>
+  if (n > Array.length(array)) {
+    [||]
+  } else {
+    Array.fold_left(
+      (acc, item) =>
+        if (acc |> fst |> Array.length == n - 1) {
+          ([||], Array.append(snd(acc), [|Array.append(fst(acc), [|item|])|]))
+        } else {
+          (Array.append(fst(acc), [|item|]), snd(acc))
+        },
+      ([||], [||]),
+      array
+    )
+    |> snd
+  };

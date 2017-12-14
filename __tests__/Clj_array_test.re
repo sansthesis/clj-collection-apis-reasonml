@@ -421,6 +421,38 @@ let () =
               |> toEqual([|[|2|], [|1|]|])
           )
         }
+      );
+      describe(
+        "partition",
+        () => {
+          test(
+            "should return an empty array when given an empty array",
+            () => expect([||] |> Clj_array.partition(5)) |> toEqual([||])
+          );
+          test(
+            "should return an empty array partitioning by more than the array's size",
+            () =>
+              expect([|1, 2, 3|] |> Clj_array.partition(5)) |> toEqual([||])
+          );
+          test(
+            "should return an array of arrays of single elements when partitioning by 1",
+            () =>
+              expect([|1, 2, 3|] |> Clj_array.partition(1))
+              |> toEqual([|[|1|], [|2|], [|3|]|])
+          );
+          test(
+            "should return an array of arrays of elements each of size N",
+            () =>
+              expect([|1, 2, 3, 4|] |> Clj_array.partition(2))
+              |> toEqual([|[|1, 2|], [|3, 4|]|])
+          );
+          test(
+            "should lose the items at the end that don't fill the last partition of size N",
+            () =>
+              expect([|1, 2, 3, 4|] |> Clj_array.partition(3))
+              |> toEqual([|[|1, 2, 3|]|])
+          )
+        }
       )
     }
   );
