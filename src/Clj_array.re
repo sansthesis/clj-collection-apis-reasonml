@@ -156,3 +156,12 @@ let butLast = (array) =>
   | 1 => None
   | _ => Some(Array.sub(array, 0, Array.length(array) - 1))
   };
+
+let dropLast = (n, array) => {
+  let remainder = Array.length(array) - n;
+  if (remainder < 0) {
+    [||]
+  } else {
+    Array.sub(array, 0, remainder)
+  }
+};

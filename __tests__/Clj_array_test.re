@@ -306,6 +306,30 @@ let () =
               |> toEqual(Some([|1, 2|]))
           )
         }
+      );
+      describe(
+        "dropLast",
+        () => {
+          test(
+            "should return an empty array when given an empty array",
+            () => expect([||] |> Clj_array.dropLast(5)) |> toEqual([||])
+          );
+          test(
+            "should return an empty array when dropping more than the array has",
+            () => expect([|1, 2|] |> Clj_array.dropLast(5)) |> toEqual([||])
+          );
+          test(
+            "should return the source array when dropping 0",
+            () =>
+              expect([|1, 2|] |> Clj_array.dropLast(0)) |> toEqual([|1, 2|])
+          );
+          test(
+            "should return an array of everything but the last N elements",
+            () =>
+              expect([|1, 2, 3, 4, 5|] |> Clj_array.dropLast(2))
+              |> toEqual([|1, 2, 3|])
+          )
+        }
       )
     }
   );
