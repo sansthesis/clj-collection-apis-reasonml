@@ -136,3 +136,16 @@ let takeNth = (n, array) =>
     array
   )
   |> snd;
+
+let takeWhile = (predicate, array) =>
+  Array.fold_left(
+    (acc, item) =>
+      if (fst(acc) && predicate(item)) {
+        (true, Array.append(snd(acc), [|item|]))
+      } else {
+        (false, snd(acc))
+      },
+    (true, [||]),
+    array
+  )
+  |> snd;

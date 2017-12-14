@@ -267,6 +267,26 @@ let () =
             }
           )
         }
+      );
+      describe(
+        "takeWhile",
+        () => {
+          test(
+            "should return an empty array when given an empty array",
+            () => expect([||] |> Clj_array.takeWhile(even)) |> toEqual([||])
+          );
+          test(
+            "should return an empty array when the first element is false",
+            () =>
+              expect([|1, 2, 3|] |> Clj_array.takeWhile(even)) |> toEqual([||])
+          );
+          test(
+            "should return the prefix of the array until the predicate is false",
+            () =>
+              expect([|2, 4, 6, 1, 2, 3, 4|] |> Clj_array.takeWhile(even))
+              |> toEqual([|2, 4, 6|])
+          )
+        }
       )
     }
   );
