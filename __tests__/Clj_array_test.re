@@ -392,6 +392,35 @@ let () =
             }
           )
         }
+      );
+      describe(
+        "splitWith",
+        () => {
+          test(
+            "should return an array of two empty arrays when given an empty array",
+            () =>
+              expect([||] |> Clj_array.splitWith(even))
+              |> toEqual([|[||], [||]|])
+          );
+          test(
+            "should put an array of one element into the second array if the predicate is false",
+            () =>
+              expect([|1|] |> Clj_array.splitWith(even))
+              |> toEqual([|[||], [|1|]|])
+          );
+          test(
+            "should put an array of one element into the first array if the predicate is true",
+            () =>
+              expect([|2|] |> Clj_array.splitWith(even))
+              |> toEqual([|[|2|], [||]|])
+          );
+          test(
+            "should split as much prefix where the predicate is true into the first array and the rest into the second array",
+            () =>
+              expect([|2, 1|] |> Clj_array.splitWith(even))
+              |> toEqual([|[|2|], [|1|]|])
+          )
+        }
       )
     }
   );

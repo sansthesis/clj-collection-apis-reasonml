@@ -181,3 +181,8 @@ let reverse = (array) => {
 };
 
 let splitAt = (index, array) => [|take(index, array), drop(index, array)|];
+
+let splitWith = (predicate, array) => [|
+  takeWhile(predicate, array),
+  dropWhile(predicate, array)
+|];
