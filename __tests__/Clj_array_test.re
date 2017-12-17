@@ -679,6 +679,26 @@ let () =
             () => expect([|1|] |> Clj_array.empty) |> toEqual(false)
           )
         }
+      );
+      describe(
+        "repeatedly",
+        () => {
+          let dummy = () => 7;
+          test(
+            "should return an empty array when specified to call 0 times",
+            () => expect(Clj_array.repeatedly(0, dummy)) |> toEqual([||])
+          );
+          test(
+            "should return an array with one element when specified to call 1 time",
+            () => expect(Clj_array.repeatedly(1, dummy)) |> toEqual([|7|])
+          );
+          test(
+            "should return an array with N values from output of the invocation of the function called N times",
+            () =>
+              expect(Clj_array.repeatedly(5, dummy))
+              |> toEqual([|7, 7, 7, 7, 7|])
+          )
+        }
       )
     }
   );
