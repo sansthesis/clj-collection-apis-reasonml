@@ -341,3 +341,5 @@ let conj = (array, item) =>
   | None => [|item|]
   | Some(arr) => Array.append(arr, [|item|])
   };
+
+let contains = (array, index) => index >= 0 && index < Array.length(array);

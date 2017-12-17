@@ -773,6 +773,23 @@ let () =
               |> toEqual([|3, 4, 10, 12|])
           )
         }
+      );
+      describe(
+        "contains",
+        () => {
+          test(
+            "should return false when given an empty array",
+            () => expect(Clj_array.contains([||], 0)) |> toEqual(false)
+          );
+          test(
+            "should return false when the given index is not within the array's bounds",
+            () => expect(Clj_array.contains([|1, 2, 3|], 7)) |> toEqual(false)
+          );
+          test(
+            "should return true when the given index is within the array's bounds",
+            () => expect(Clj_array.contains([|1, 2, 3|], 1)) |> toEqual(true)
+          )
+        }
       )
     }
   );
