@@ -250,3 +250,10 @@ let second = (array) =>
   } else {
     Some(array[1])
   };
+
+let nth = (index, defaultValue, array) =>
+  if (index >= 0 && index < Array.length(array)) {
+    array[index]
+  } else {
+    defaultValue
+  };

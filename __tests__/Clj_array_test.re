@@ -534,6 +534,23 @@ let () =
             () => expect([|1, 5|] |> Clj_array.second) |> toEqual(Some(5))
           )
         }
+      );
+      describe(
+        "nth",
+        () => {
+          test(
+            "returns the default value for an empty array",
+            () => expect([||] |> Clj_array.nth(0, 33)) |> toEqual(33)
+          );
+          test(
+            "returns the default value for an empty array",
+            () => expect([||] |> Clj_array.nth(0, 33)) |> toEqual(33)
+          );
+          test(
+            "returns the element at the specified index if it is within range",
+            () => expect([|1, 2, 3|] |> Clj_array.nth(0, 33)) |> toEqual(1)
+          )
+        }
       )
     }
   );
