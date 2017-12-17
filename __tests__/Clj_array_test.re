@@ -616,7 +616,34 @@ let () =
           );
           test(
             "should return false when the predicate returns false for an element",
-            () => expect([|1|] |> Clj_array.every(even)) |> toEqual(false)
+            () =>
+              expect([|1, 2, 3|] |> Clj_array.every(even)) |> toEqual(false)
+          );
+          test(
+            "should return true when the predicate returns true for all elements in the array",
+            () =>
+              expect([|2, 4, 6, 8, 0|] |> Clj_array.every(even))
+              |> toEqual(true)
+          )
+        }
+      );
+      describe(
+        "notEvery",
+        () => {
+          test(
+            "should return false when given an empty array",
+            () => expect([||] |> Clj_array.notEvery(even)) |> toEqual(false)
+          );
+          test(
+            "should return true when the predicate returns false for an element",
+            () =>
+              expect([|1, 2, 3|] |> Clj_array.notEvery(even)) |> toEqual(true)
+          );
+          test(
+            "should return false when the predicate returns true for all elements in the array",
+            () =>
+              expect([|2, 4, 6, 8, 0|] |> Clj_array.notEvery(even))
+              |> toEqual(false)
           )
         }
       )

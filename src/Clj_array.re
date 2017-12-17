@@ -290,3 +290,5 @@ let some = (predicate, array) =>
 
 let every = (predicate, array) =>
   Array.fold_left((acc, item) => acc && predicate(item), true, array);
+
+let notEvery = (predicate, array) => ! every(predicate, array);
