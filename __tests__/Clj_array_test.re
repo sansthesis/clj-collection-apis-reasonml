@@ -606,6 +606,19 @@ let () =
               |> toEqual(Some(8))
           )
         }
+      );
+      describe(
+        "every",
+        () => {
+          test(
+            "should return true when given an empty array",
+            () => expect([||] |> Clj_array.every(even)) |> toEqual(true)
+          );
+          test(
+            "should return false when the predicate returns false for an element",
+            () => expect([|1|] |> Clj_array.every(even)) |> toEqual(false)
+          )
+        }
       )
     }
   );

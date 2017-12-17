@@ -287,3 +287,6 @@ let some = (predicate, array) =>
     None,
     array
   );
+
+let every = (predicate, array) =>
+  Array.fold_left((acc, item) => acc && predicate(item), true, array);
