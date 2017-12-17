@@ -646,6 +646,26 @@ let () =
               |> toEqual(false)
           )
         }
+      );
+      describe(
+        "notAny",
+        () => {
+          test(
+            "should return true when given an empty array",
+            () => expect([||] |> Clj_array.notAny(even)) |> toEqual(true)
+          );
+          test(
+            "should return true when the predicate returns false for all elements in the array",
+            () =>
+              expect([|1, 3, 1, 5, 1, 1|] |> Clj_array.notAny(even))
+              |> toEqual(true)
+          );
+          test(
+            "should return false when the predicate returns true for an element",
+            () =>
+              expect([|1, 2, 3|] |> Clj_array.notAny(even)) |> toEqual(false)
+          )
+        }
       )
     }
   );
