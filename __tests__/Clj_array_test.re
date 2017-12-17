@@ -586,6 +586,26 @@ let () =
             }
           )
         }
+      );
+      describe(
+        "some",
+        () => {
+          test(
+            "should return None when given an empty array",
+            () => expect([||] |> Clj_array.some(even)) |> toEqual(None)
+          );
+          test(
+            "should return None when the predicate returns true for no element in the array",
+            () =>
+              expect([|1, 3, 5, 7|] |> Clj_array.some(even)) |> toEqual(None)
+          );
+          test(
+            "should return the first value in the array for which the predicate returns true",
+            () =>
+              expect([|1, 8, 3, 5, 7|] |> Clj_array.some(even))
+              |> toEqual(Some(8))
+          )
+        }
       )
     }
   );

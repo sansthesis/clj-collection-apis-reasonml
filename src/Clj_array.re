@@ -271,3 +271,19 @@ let notEmpty = (array) =>
   } else {
     Some(array)
   };
+
+let some = (predicate, array) =>
+  Array.fold_left(
+    (acc, item) =>
+      switch acc {
+      | Some(x) => Some(x)
+      | None =>
+        if (predicate(item)) {
+          Some(item)
+        } else {
+          None
+        }
+      },
+    None,
+    array
+  );
