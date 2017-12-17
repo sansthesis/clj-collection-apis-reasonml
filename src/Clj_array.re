@@ -335,3 +335,9 @@ let dedupe = (array) =>
       Array.append(arr, [|lastItemInArray|])
     }
   };
+
+let conj = (array, item) =>
+  switch array {
+  | None => [|item|]
+  | Some(arr) => Array.append(arr, [|item|])
+  };
