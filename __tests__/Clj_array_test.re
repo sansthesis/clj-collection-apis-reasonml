@@ -699,6 +699,23 @@ let () =
               |> toEqual([|7, 7, 7, 7, 7|])
           )
         }
+      );
+      describe(
+        "repeat",
+        () => {
+          test(
+            "should return an empty array when specified to call 0 times",
+            () => expect(Clj_array.repeat(0, 1)) |> toEqual([||])
+          );
+          test(
+            "should return an array with one element when specified to repeat 1 time",
+            () => expect(Clj_array.repeat(1, 4)) |> toEqual([|4|])
+          );
+          test(
+            "should return an array with N elements when specified to repeat N times",
+            () => expect(Clj_array.repeat(3, 4)) |> toEqual([|4, 4, 4|])
+          )
+        }
       )
     }
   );

@@ -302,3 +302,5 @@ let notAny = (predicate, array) =>
 let empty = (array) => Array.length(array) == 0;
 
 let repeatedly = (n, fn) => Array.init(n, (_) => fn());
+
+let repeat = (n, value) => Array.init(n, (_) => value);
