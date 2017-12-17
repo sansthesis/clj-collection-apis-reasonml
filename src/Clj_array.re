@@ -304,3 +304,10 @@ let empty = (array) => Array.length(array) == 0;
 let repeatedly = (n, fn) => Array.init(n, (_) => fn());
 
 let repeat = (n, value) => Array.init(n, (_) => value);
+
+let rec range = (start, _end) =>
+  if (start >= _end) {
+    [||]
+  } else {
+    Array.append([|start|], range(start + 1, _end))
+  };

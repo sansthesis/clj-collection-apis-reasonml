@@ -716,6 +716,19 @@ let () =
             () => expect(Clj_array.repeat(3, 4)) |> toEqual([|4, 4, 4|])
           )
         }
+      );
+      describe(
+        "range",
+        () => {
+          test(
+            "should return an empty array when the start matches the end",
+            () => expect(Clj_array.range(1, 1)) |> toEqual([||])
+          );
+          test(
+            "should return an array of the start when the end is 1 higher than the start",
+            () => expect(Clj_array.range(1, 2)) |> toEqual([|1|])
+          )
+        }
       )
     }
   );
