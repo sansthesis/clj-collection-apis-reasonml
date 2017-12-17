@@ -243,3 +243,10 @@ let partitionBy = (fn, array) =>
       );
     Array.append(value, [|r|])
   };
+
+let second = (array) =>
+  if (Array.length(array) < 2) {
+    None
+  } else {
+    Some(array[1])
+  };
