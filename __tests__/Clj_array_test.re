@@ -551,6 +551,22 @@ let () =
             () => expect([|1, 2, 3|] |> Clj_array.nth(0, 33)) |> toEqual(1)
           )
         }
+      );
+      describe(
+        "last",
+        () => {
+          test(
+            "should return None for an empty array",
+            () => expect([||] |> Clj_array.last) |> toEqual(None)
+          );
+          test(
+            "should return the final item in an array",
+            () => {
+              expect([|1|] |> Clj_array.last) |> toEqual(Some(1)) |> ignore;
+              expect([|1, 2|] |> Clj_array.last) |> toEqual(Some(2))
+            }
+          )
+        }
       )
     }
   );

@@ -257,3 +257,10 @@ let nth = (index, defaultValue, array) =>
   } else {
     defaultValue
   };
+
+let last = (array) =>
+  if (Array.length(array) == 0) {
+    None
+  } else {
+    Some(array[Array.length(array) - 1])
+  };
