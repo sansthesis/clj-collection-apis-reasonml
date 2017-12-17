@@ -311,3 +311,27 @@ let rec range = (start, _end) =>
   } else {
     Array.append([|start|], range(start + 1, _end))
   };
+
+let dedupe = (array) =>
+  if (Array.length(array) == 0) {
+    [||]
+  } else {
+    let (lastItemInArray, itemLastInserted, arr) =
+      Array.fold_left(
+        (acc, item) => {
+          let (current, _, arr) = acc;
+          if (current == item) {
+            acc
+          } else {
+            (item, current, Array.append(arr, [|current|]))
+          }
+        },
+        (array[0], array[0], [||]),
+        array
+      );
+    if (lastItemInArray == itemLastInserted) {
+      arr
+    } else {
+      Array.append(arr, [|lastItemInArray|])
+    }
+  };

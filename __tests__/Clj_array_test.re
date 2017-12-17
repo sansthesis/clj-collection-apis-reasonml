@@ -727,6 +727,31 @@ let () =
           test(
             "should return an array of the start when the end is 1 higher than the start",
             () => expect(Clj_array.range(1, 2)) |> toEqual([|1|])
+          );
+          test(
+            "should return an array from start to end - 1",
+            () => expect(Clj_array.range(1, 5)) |> toEqual([|1, 2, 3, 4|])
+          )
+        }
+      );
+      describe(
+        "dedupe",
+        () => {
+          test(
+            "should return an empty array when given an empty array",
+            () => expect([||] |> Clj_array.dedupe) |> toEqual([||])
+          );
+          test(
+            "should return the source array when given an array without consecutive values",
+            () =>
+              expect([|1, 2, 3, 1|] |> Clj_array.dedupe)
+              |> toEqual([|1, 2, 3, 1|])
+          );
+          test(
+            "should return an array without consecutive duplicate values",
+            () =>
+              expect([|1, 1, 2, 2, 3, 1, 1|] |> Clj_array.dedupe)
+              |> toEqual([|1, 2, 3, 1|])
           )
         }
       )
