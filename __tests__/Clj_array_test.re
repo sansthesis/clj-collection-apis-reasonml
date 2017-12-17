@@ -21,7 +21,7 @@ let () =
             }
           );
           test(
-            "should return None for an empty array",
+            "should return None when given an empty array",
             () => expect([||] |> Clj_array.first) |> toEqual(None)
           )
         }
@@ -45,7 +45,7 @@ let () =
             }
           );
           test(
-            "should return an empty array for an empty array",
+            "should return an empty array when given an empty array",
             () => expect([||] |> Clj_array.rest) |> toEqual([||])
           )
         }
@@ -71,7 +71,7 @@ let () =
             }
           );
           test(
-            "should return None for an empty array",
+            "should return None when given an empty array",
             () => expect([||] |> Clj_array.next) |> toEqual(None)
           )
         }
@@ -522,7 +522,7 @@ let () =
         "second",
         () => {
           test(
-            "should return None for an empty array",
+            "should return None when given an empty array",
             () => expect([||] |> Clj_array.second) |> toEqual(None)
           );
           test(
@@ -539,15 +539,15 @@ let () =
         "nth",
         () => {
           test(
-            "returns the default value for an empty array",
+            "should return the default value when given an empty array",
             () => expect([||] |> Clj_array.nth(0, 33)) |> toEqual(33)
           );
           test(
-            "returns the default value for an empty array",
+            "should return the default value when given an empty array",
             () => expect([||] |> Clj_array.nth(0, 33)) |> toEqual(33)
           );
           test(
-            "returns the element at the specified index if it is within range",
+            "should return the element at the specified index if it is within range",
             () => expect([|1, 2, 3|] |> Clj_array.nth(0, 33)) |> toEqual(1)
           )
         }
@@ -556,7 +556,7 @@ let () =
         "last",
         () => {
           test(
-            "should return None for an empty array",
+            "should return None when given an empty array",
             () => expect([||] |> Clj_array.last) |> toEqual(None)
           );
           test(
@@ -564,6 +564,25 @@ let () =
             () => {
               expect([|1|] |> Clj_array.last) |> toEqual(Some(1)) |> ignore;
               expect([|1, 2|] |> Clj_array.last) |> toEqual(Some(2))
+            }
+          )
+        }
+      );
+      describe(
+        "notEmpty",
+        () => {
+          test(
+            "should return None when given an empty array",
+            () => expect([||] |> Clj_array.notEmpty) |> toEqual(None)
+          );
+          test(
+            "should return the source array for a non-empty array",
+            () => {
+              expect([|1|] |> Clj_array.notEmpty)
+              |> toEqual(Some([|1|]))
+              |> ignore;
+              expect([|1, 2, 3|] |> Clj_array.notEmpty)
+              |> toEqual(Some([|1, 2, 3|]))
             }
           )
         }

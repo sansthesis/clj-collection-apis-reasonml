@@ -264,3 +264,10 @@ let last = (array) =>
   } else {
     Some(array[Array.length(array) - 1])
   };
+
+let notEmpty = (array) =>
+  if (Array.length(array) == 0) {
+    None
+  } else {
+    Some(array)
+  };
