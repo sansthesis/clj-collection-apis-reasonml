@@ -203,3 +203,22 @@ let partition = (n, array) =>
     )
     |> snd
   };
+
+let partitionAll = (n, array) => {
+  let (remainder, partitions) =
+    Array.fold_left(
+      (acc, item) =>
+        if (acc |> fst |> Array.length == n - 1) {
+          ([||], Array.append(snd(acc), [|Array.append(fst(acc), [|item|])|]))
+        } else {
+          (Array.append(fst(acc), [|item|]), snd(acc))
+        },
+      ([||], [||]),
+      array
+    );
+  if (Array.length(remainder) > 0) {
+    Array.append(partitions, [|remainder|])
+  } else {
+    partitions
+  }
+};
