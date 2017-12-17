@@ -222,3 +222,24 @@ let partitionAll = (n, array) => {
     partitions
   }
 };
+
+let partitionBy = (fn, array) =>
+  if (Array.length(array) == 0) {
+    [||]
+  } else {
+    let (_, r, value) =
+      Array.fold_left(
+        (acc, item) => {
+          let (fnValue, remainder, partitions) = acc;
+          let newFnValue = fn(item);
+          if (fnValue == newFnValue) {
+            (newFnValue, Array.append(remainder, [|item|]), partitions)
+          } else {
+            (newFnValue, [|item|], Array.append(partitions, [|remainder|]))
+          }
+        },
+        (fn(array[0]), [|array[0]|], [||]),
+        rest(array)
+      );
+    Array.append(value, [|r|])
+  };

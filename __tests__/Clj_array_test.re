@@ -4,6 +4,8 @@ open Expect;
 
 let even = (a) => a mod 2 == 0;
 
+let identity = (a) => a;
+
 let () =
   describe(
     "Clj_array",
@@ -484,6 +486,35 @@ let () =
             () =>
               expect([|1, 2, 3, 4|] |> Clj_array.partitionAll(3))
               |> toEqual([|[|1, 2, 3|], [|4|]|])
+          )
+        }
+      );
+      describe(
+        "partitionBy",
+        () => {
+          test(
+            "should return an empty array when given an empty array",
+            () => expect([||] |> Clj_array.partitionBy(even)) |> toEqual([||])
+          );
+          test(
+            "should return an array of an array of a single element when given an array of one element",
+            () =>
+              expect([|1|] |> Clj_array.partitionBy(even))
+              |> toEqual([|[|1|]|])
+          );
+          test(
+            "should return an array of arrays of single elements when partitioning an array of ascending numbers by the identify function",
+            () =>
+              expect([|1, 2, 3|] |> Clj_array.partitionBy(identity))
+              |> toEqual([|[|1|], [|2|], [|3|]|])
+          );
+          test(
+            "should return an array of arrays of elements whenever the function value doesn't change",
+            () =>
+              expect(
+                [|1, 2, 4, 6, 8, 1, 3, 2, 3|] |> Clj_array.partitionBy(even)
+              )
+              |> toEqual([|[|1|], [|2, 4, 6, 8|], [|1, 3|], [|2|], [|3|]|])
           )
         }
       )
