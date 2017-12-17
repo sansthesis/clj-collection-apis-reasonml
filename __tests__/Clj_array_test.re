@@ -666,6 +666,19 @@ let () =
               expect([|1, 2, 3|] |> Clj_array.notAny(even)) |> toEqual(false)
           )
         }
+      );
+      describe(
+        "empty",
+        () => {
+          test(
+            "should return true when given an empty array",
+            () => expect([||] |> Clj_array.empty) |> toEqual(true)
+          );
+          test(
+            "should return false when given a non-empty array",
+            () => expect([|1|] |> Clj_array.empty) |> toEqual(false)
+          )
+        }
       )
     }
   );

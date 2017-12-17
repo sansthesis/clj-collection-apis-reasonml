@@ -298,3 +298,5 @@ let notAny = (predicate, array) =>
   | None => true
   | Some(_) => false
   };
+
+let empty = (array) => Array.length(array) == 0;
