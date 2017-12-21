@@ -151,14 +151,15 @@ let rec butLast = (list) =>
  };
  */
 let reverse = List.rev;
+
+let splitAt = (index, list) => [take(index, list), drop(index, list)];
+
+/* Can be optimized to not run over the list twice https://github.com/jasonrose/clj-collection-apis-reasonml/issues/2 */
+let splitWith = (predicate, list) => [
+  takeWhile(predicate, list),
+  dropWhile(predicate, list)
+];
 /*
- let splitAt = (index, list) => [take(index, list), drop(index, list)];
-
- let splitWith = (predicate, list) => [
-   takeWhile(predicate, list),
-   dropWhile(predicate, list)
- ];
-
  let partition = (n, list) =>
    if (n > List.length(list)) {
      []

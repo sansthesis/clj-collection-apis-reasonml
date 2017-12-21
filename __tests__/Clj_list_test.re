@@ -326,67 +326,67 @@ let () =
             }
           )
         }
+      );
+      describe(
+        "splitAt",
+        () => {
+          test(
+            "should return an list of two empty lists when given an empty list",
+            () => {
+              expect([] |> Clj_list.splitAt(0)) |> toEqual([[], []]) |> ignore;
+              expect([] |> Clj_list.splitAt(10)) |> toEqual([[], []])
+            }
+          );
+          test(
+            "should put everything into the first list if splitting at a number higher than the list's length",
+            () =>
+              expect([1, 2, 3] |> Clj_list.splitAt(10))
+              |> toEqual([[1, 2, 3], []])
+          );
+          test(
+            "should put everything into the second list if splitting at 0",
+            () =>
+              expect([1, 2, 3] |> Clj_list.splitAt(0))
+              |> toEqual([[], [1, 2, 3]])
+          );
+          test(
+            "should partition the list at the specified index",
+            () => {
+              expect([1, 2, 3] |> Clj_list.splitAt(1))
+              |> toEqual([[1], [2, 3]])
+              |> ignore;
+              expect([1, 2, 3] |> Clj_list.splitAt(2))
+              |> toEqual([[1, 2], [3]])
+              |> ignore;
+              expect([1, 2, 3, 4] |> Clj_list.splitAt(2))
+              |> toEqual([[1, 2], [3, 4]])
+            }
+          )
+        }
+      );
+      describe(
+        "splitWith",
+        () => {
+          test(
+            "should return an list of two empty lists when given an empty list",
+            () => expect([] |> Clj_list.splitWith(even)) |> toEqual([[], []])
+          );
+          test(
+            "should put an list of one element into the second list if the predicate is false",
+            () => expect([1] |> Clj_list.splitWith(even)) |> toEqual([[], [1]])
+          );
+          test(
+            "should put an list of one element into the first list if the predicate is true",
+            () => expect([2] |> Clj_list.splitWith(even)) |> toEqual([[2], []])
+          );
+          test(
+            "should split as much prefix where the predicate is true into the first list and the rest into the second list",
+            () =>
+              expect([2, 1] |> Clj_list.splitWith(even)) |> toEqual([[2], [1]])
+          )
+        }
       )
       /*
-       describe(
-         "splitAt",
-         () => {
-           test(
-             "should return an list of two empty lists when given an empty list",
-             () => {
-               expect([] |> Clj_list.splitAt(0)) |> toEqual([[], []]) |> ignore;
-               expect([] |> Clj_list.splitAt(10)) |> toEqual([[], []])
-             }
-           );
-           test(
-             "should put everything into the first list if splitting at a number higher than the list's length",
-             () =>
-               expect([1, 2, 3] |> Clj_list.splitAt(10))
-               |> toEqual([[1, 2, 3], []])
-           );
-           test(
-             "should put everything into the second list if splitting at 0",
-             () =>
-               expect([1, 2, 3] |> Clj_list.splitAt(0))
-               |> toEqual([[], [1, 2, 3]])
-           );
-           test(
-             "should partition the list at the specified index",
-             () => {
-               expect([1, 2, 3] |> Clj_list.splitAt(1))
-               |> toEqual([[1], [2, 3]])
-               |> ignore;
-               expect([1, 2, 3] |> Clj_list.splitAt(2))
-               |> toEqual([[1, 2], [3]])
-               |> ignore;
-               expect([1, 2, 3, 4] |> Clj_list.splitAt(2))
-               |> toEqual([[1, 2], [3, 4]])
-             }
-           )
-         }
-       );
-       describe(
-         "splitWith",
-         () => {
-           test(
-             "should return an list of two empty lists when given an empty list",
-             () => expect([] |> Clj_list.splitWith(even)) |> toEqual([[], []])
-           );
-           test(
-             "should put an list of one element into the second list if the predicate is false",
-             () => expect([1] |> Clj_list.splitWith(even)) |> toEqual([[], [1]])
-           );
-           test(
-             "should put an list of one element into the first list if the predicate is true",
-             () => expect([2] |> Clj_list.splitWith(even)) |> toEqual([[2], []])
-           );
-           test(
-             "should split as much prefix where the predicate is true into the first list and the rest into the second list",
-             () =>
-               expect([2, 1] |> Clj_list.splitWith(even)) |> toEqual([[2], [1]])
-           )
-         }
-       );
        describe(
          "partition",
          () => {
