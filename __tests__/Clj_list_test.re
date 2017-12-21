@@ -524,25 +524,25 @@ let () =
             }
           )
         }
+      );
+      describe(
+        "notEmpty",
+        () => {
+          test(
+            "should return None when given an empty list",
+            () => expect([] |> Clj_list.notEmpty) |> toEqual(None)
+          );
+          test(
+            "should return the source list for a non-empty list",
+            () => {
+              expect([1] |> Clj_list.notEmpty) |> toEqual(Some([1])) |> ignore;
+              expect([1, 2, 3] |> Clj_list.notEmpty)
+              |> toEqual(Some([1, 2, 3]))
+            }
+          )
+        }
       )
       /*
-       describe(
-         "notEmpty",
-         () => {
-           test(
-             "should return None when given an empty list",
-             () => expect([] |> Clj_list.notEmpty) |> toEqual(None)
-           );
-           test(
-             "should return the source list for a non-empty list",
-             () => {
-               expect([1] |> Clj_list.notEmpty) |> toEqual(Some([1])) |> ignore;
-               expect([1, 2, 3] |> Clj_list.notEmpty)
-               |> toEqual(Some([1, 2, 3]))
-             }
-           )
-         }
-       );
        describe(
          "some",
          () => {

@@ -238,14 +238,13 @@ let rec last = (list) =>
   | [a] => Some(a)
   | [_, ...rest] => last(rest)
   };
-/*
- let notEmpty = (list) =>
-   if (List.length(list) == 0) {
-     None
-   } else {
-     Some(list)
-   };
 
+let notEmpty = (list) =>
+  switch list {
+  | [] => None
+  | _ => Some(list)
+  };
+/*
  let some = (predicate, list) =>
    List.fold_left(
      (acc, item) =>
