@@ -244,34 +244,34 @@ let notEmpty = (list) =>
   | [] => None
   | _ => Some(list)
   };
+
+let some = (predicate, list) =>
+  List.fold_left(
+    (acc, item) =>
+      switch acc {
+      | Some(x) => Some(x)
+      | None =>
+        if (predicate(item)) {
+          Some(item)
+        } else {
+          None
+        }
+      },
+    None,
+    list
+  );
+
+let every = (predicate, list) =>
+  List.fold_left((acc, item) => acc && predicate(item), true, list);
+
+let notEvery = (predicate, list) => ! every(predicate, list);
+
+let notAny = (predicate, list) =>
+  switch (some(predicate, list)) {
+  | None => true
+  | Some(_) => false
+  };
 /*
- let some = (predicate, list) =>
-   List.fold_left(
-     (acc, item) =>
-       switch acc {
-       | Some(x) => Some(x)
-       | None =>
-         if (predicate(item)) {
-           Some(item)
-         } else {
-           None
-         }
-       },
-     None,
-     list
-   );
-
- let every = (predicate, list) =>
-   List.fold_left((acc, item) => acc && predicate(item), true, list);
-
- let notEvery = (predicate, list) => ! every(predicate, list);
-
- let notAny = (predicate, list) =>
-   switch (some(predicate, list)) {
-   | None => true
-   | Some(_) => false
-   };
-
  let empty = (list) => List.length(list) == 0;
 
  let repeatedly = (n, fn) => List.init(n, (_) => fn());

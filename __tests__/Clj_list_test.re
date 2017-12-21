@@ -541,83 +541,83 @@ let () =
             }
           )
         }
+      );
+      describe(
+        "some",
+        () => {
+          test(
+            "should return None when given an empty list",
+            () => expect([] |> Clj_list.some(even)) |> toEqual(None)
+          );
+          test(
+            "should return None when the predicate returns true for no element in the list",
+            () => expect([1, 3, 5, 7] |> Clj_list.some(even)) |> toEqual(None)
+          );
+          test(
+            "should return the first value in the list for which the predicate returns true",
+            () =>
+              expect([1, 8, 3, 5, 7] |> Clj_list.some(even))
+              |> toEqual(Some(8))
+          )
+        }
+      );
+      describe(
+        "every",
+        () => {
+          test(
+            "should return true when given an empty list",
+            () => expect([] |> Clj_list.every(even)) |> toEqual(true)
+          );
+          test(
+            "should return false when the predicate returns false for an element",
+            () => expect([1, 2, 3] |> Clj_list.every(even)) |> toEqual(false)
+          );
+          test(
+            "should return true when the predicate returns true for all elements in the list",
+            () =>
+              expect([2, 4, 6, 8, 0] |> Clj_list.every(even)) |> toEqual(true)
+          )
+        }
+      );
+      describe(
+        "notEvery",
+        () => {
+          test(
+            "should return false when given an empty list",
+            () => expect([] |> Clj_list.notEvery(even)) |> toEqual(false)
+          );
+          test(
+            "should return true when the predicate returns false for an element",
+            () => expect([1, 2, 3] |> Clj_list.notEvery(even)) |> toEqual(true)
+          );
+          test(
+            "should return false when the predicate returns true for all elements in the list",
+            () =>
+              expect([2, 4, 6, 8, 0] |> Clj_list.notEvery(even))
+              |> toEqual(false)
+          )
+        }
+      );
+      describe(
+        "notAny",
+        () => {
+          test(
+            "should return true when given an empty list",
+            () => expect([] |> Clj_list.notAny(even)) |> toEqual(true)
+          );
+          test(
+            "should return true when the predicate returns false for all elements in the list",
+            () =>
+              expect([1, 3, 1, 5, 1, 1] |> Clj_list.notAny(even))
+              |> toEqual(true)
+          );
+          test(
+            "should return false when the predicate returns true for an element",
+            () => expect([1, 2, 3] |> Clj_list.notAny(even)) |> toEqual(false)
+          )
+        }
       )
       /*
-       describe(
-         "some",
-         () => {
-           test(
-             "should return None when given an empty list",
-             () => expect([] |> Clj_list.some(even)) |> toEqual(None)
-           );
-           test(
-             "should return None when the predicate returns true for no element in the list",
-             () => expect([1, 3, 5, 7] |> Clj_list.some(even)) |> toEqual(None)
-           );
-           test(
-             "should return the first value in the list for which the predicate returns true",
-             () =>
-               expect([1, 8, 3, 5, 7] |> Clj_list.some(even))
-               |> toEqual(Some(8))
-           )
-         }
-       );
-       describe(
-         "every",
-         () => {
-           test(
-             "should return true when given an empty list",
-             () => expect([] |> Clj_list.every(even)) |> toEqual(true)
-           );
-           test(
-             "should return false when the predicate returns false for an element",
-             () => expect([1, 2, 3] |> Clj_list.every(even)) |> toEqual(false)
-           );
-           test(
-             "should return true when the predicate returns true for all elements in the list",
-             () =>
-               expect([2, 4, 6, 8, 0] |> Clj_list.every(even)) |> toEqual(true)
-           )
-         }
-       );
-       describe(
-         "notEvery",
-         () => {
-           test(
-             "should return false when given an empty list",
-             () => expect([] |> Clj_list.notEvery(even)) |> toEqual(false)
-           );
-           test(
-             "should return true when the predicate returns false for an element",
-             () => expect([1, 2, 3] |> Clj_list.notEvery(even)) |> toEqual(true)
-           );
-           test(
-             "should return false when the predicate returns true for all elements in the list",
-             () =>
-               expect([2, 4, 6, 8, 0] |> Clj_list.notEvery(even))
-               |> toEqual(false)
-           )
-         }
-       );
-       describe(
-         "notAny",
-         () => {
-           test(
-             "should return true when given an empty list",
-             () => expect([] |> Clj_list.notAny(even)) |> toEqual(true)
-           );
-           test(
-             "should return true when the predicate returns false for all elements in the list",
-             () =>
-               expect([1, 3, 1, 5, 1, 1] |> Clj_list.notAny(even))
-               |> toEqual(true)
-           );
-           test(
-             "should return false when the predicate returns true for an element",
-             () => expect([1, 2, 3] |> Clj_list.notAny(even)) |> toEqual(false)
-           )
-         }
-       );
        describe(
          "empty",
          () => {
