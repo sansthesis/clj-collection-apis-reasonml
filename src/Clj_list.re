@@ -176,26 +176,25 @@ let partition = (n, list) => {
     );
   output
 };
-/*
- let partitionAll = (n, list) => {
-   let (remainder, partitions) =
-     List.fold_left(
-       (acc, item) =>
-         if (acc |> fst |> List.length == n - 1) {
-           ([], List.append(snd(acc), [List.append(fst(acc), [item])]))
-         } else {
-           (List.append(fst(acc), [item]), snd(acc))
-         },
-       ([], []),
-       list
-     );
-   if (List.length(remainder) > 0) {
-     List.append(partitions, [remainder])
-   } else {
-     partitions
-   }
- };
 
+let partitionAll = (n, list) => {
+  let (remainder, partitions) =
+    List.fold_left(
+      (acc, item) =>
+        if (acc |> fst |> List.length == n - 1) {
+          ([], List.append(snd(acc), [List.append(fst(acc), [item])]))
+        } else {
+          (List.append(fst(acc), [item]), snd(acc))
+        },
+      ([], []),
+      list
+    );
+  switch remainder {
+  | [] => partitions
+  | _ => List.append(partitions, [remainder])
+  }
+};
+/*
  let partitionBy = (fn, list) =>
    if (List.length(list) == 0) {
      []
