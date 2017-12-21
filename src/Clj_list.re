@@ -271,13 +271,27 @@ let notAny = (predicate, list) =>
   | None => true
   | Some(_) => false
   };
+
+let empty = (list) =>
+  switch list {
+  | [] => true
+  | _ => false
+  };
+
+let rec repeatedly = (n, fn) =>
+  if (n <= 0) {
+    []
+  } else {
+    List.append([fn()], repeatedly(n - 1, fn))
+  };
+
+let rec repeat = (n, value) =>
+  if (n <= 0) {
+    []
+  } else {
+    List.append([value], repeat(n - 1, value))
+  };
 /*
- let empty = (list) => List.length(list) == 0;
-
- let repeatedly = (n, fn) => List.init(n, (_) => fn());
-
- let repeat = (n, value) => List.init(n, (_) => value);
-
  let rec range = (start, _end) =>
    if (start >= _end) {
      []

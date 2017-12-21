@@ -616,57 +616,57 @@ let () =
             () => expect([1, 2, 3] |> Clj_list.notAny(even)) |> toEqual(false)
           )
         }
+      );
+      describe(
+        "empty",
+        () => {
+          test(
+            "should return true when given an empty list",
+            () => expect([] |> Clj_list.empty) |> toEqual(true)
+          );
+          test(
+            "should return false when given a non-empty list",
+            () => expect([1] |> Clj_list.empty) |> toEqual(false)
+          )
+        }
+      );
+      describe(
+        "repeatedly",
+        () => {
+          let dummy = () => 7;
+          test(
+            "should return an empty list when specified to call 0 times",
+            () => expect(Clj_list.repeatedly(0, dummy)) |> toEqual([])
+          );
+          test(
+            "should return an list with one element when specified to call 1 time",
+            () => expect(Clj_list.repeatedly(1, dummy)) |> toEqual([7])
+          );
+          test(
+            "should return an list with N values from output of the invocation of the function called N times",
+            () =>
+              expect(Clj_list.repeatedly(5, dummy)) |> toEqual([7, 7, 7, 7, 7])
+          )
+        }
+      );
+      describe(
+        "repeat",
+        () => {
+          test(
+            "should return an empty list when specified to call 0 times",
+            () => expect(Clj_list.repeat(0, 1)) |> toEqual([])
+          );
+          test(
+            "should return an list with one element when specified to repeat 1 time",
+            () => expect(Clj_list.repeat(1, 4)) |> toEqual([4])
+          );
+          test(
+            "should return an list with N elements when specified to repeat N times",
+            () => expect(Clj_list.repeat(3, 4)) |> toEqual([4, 4, 4])
+          )
+        }
       )
       /*
-       describe(
-         "empty",
-         () => {
-           test(
-             "should return true when given an empty list",
-             () => expect([] |> Clj_list.empty) |> toEqual(true)
-           );
-           test(
-             "should return false when given a non-empty list",
-             () => expect([1] |> Clj_list.empty) |> toEqual(false)
-           )
-         }
-       );
-       describe(
-         "repeatedly",
-         () => {
-           let dummy = () => 7;
-           test(
-             "should return an empty list when specified to call 0 times",
-             () => expect(Clj_list.repeatedly(0, dummy)) |> toEqual([])
-           );
-           test(
-             "should return an list with one element when specified to call 1 time",
-             () => expect(Clj_list.repeatedly(1, dummy)) |> toEqual([7])
-           );
-           test(
-             "should return an list with N values from output of the invocation of the function called N times",
-             () =>
-               expect(Clj_list.repeatedly(5, dummy)) |> toEqual([7, 7, 7, 7, 7])
-           )
-         }
-       );
-       describe(
-         "repeat",
-         () => {
-           test(
-             "should return an empty list when specified to call 0 times",
-             () => expect(Clj_list.repeat(0, 1)) |> toEqual([])
-           );
-           test(
-             "should return an list with one element when specified to repeat 1 time",
-             () => expect(Clj_list.repeat(1, 4)) |> toEqual([4])
-           );
-           test(
-             "should return an list with N elements when specified to repeat N times",
-             () => expect(Clj_list.repeat(3, 4)) |> toEqual([4, 4, 4])
-           )
-         }
-       );
        describe(
          "range",
          () => {
