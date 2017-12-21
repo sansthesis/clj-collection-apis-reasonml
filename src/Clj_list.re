@@ -88,46 +88,46 @@ let dropWhile = (predicate, list) =>
     list
   )
   |> snd;
+
+let take = (n, list) =>
+  List.fold_left(
+    (acc, item) =>
+      if (fst(acc) > 0) {
+        (fst(acc) - 1, List.append(snd(acc), [item]))
+      } else {
+        (0, snd(acc))
+      },
+    (n, []),
+    list
+  )
+  |> snd;
+
+let takeNth = (n, list) =>
+  List.fold_left(
+    (acc, item) =>
+      if (fst(acc) mod n == 0) {
+        (fst(acc) + 1, List.append(snd(acc), [item]))
+      } else {
+        (fst(acc) + 1, snd(acc))
+      },
+    (n, []),
+    list
+  )
+  |> snd;
+
+let takeWhile = (predicate, list) =>
+  List.fold_left(
+    (acc, item) =>
+      if (fst(acc) && predicate(item)) {
+        (true, List.append(snd(acc), [item]))
+      } else {
+        (false, snd(acc))
+      },
+    (true, []),
+    list
+  )
+  |> snd;
 /*
- let take = (n, list) =>
-   List.fold_left(
-     (acc, item) =>
-       if (fst(acc) > 0) {
-         (fst(acc) - 1, List.append(snd(acc), [item]))
-       } else {
-         (0, snd(acc))
-       },
-     (n, []),
-     list
-   )
-   |> snd;
-
- let takeNth = (n, list) =>
-   List.fold_left(
-     (acc, item) =>
-       if (fst(acc) mod n == 0) {
-         (fst(acc) + 1, List.append(snd(acc), [item]))
-       } else {
-         (fst(acc) + 1, snd(acc))
-       },
-     (n, []),
-     list
-   )
-   |> snd;
-
- let takeWhile = (predicate, list) =>
-   List.fold_left(
-     (acc, item) =>
-       if (fst(acc) && predicate(item)) {
-         (true, List.append(snd(acc), [item]))
-       } else {
-         (false, snd(acc))
-       },
-     (true, []),
-     list
-   )
-   |> snd;
-
  let butLast = (list) =>
    switch (List.length(list)) {
    | 0 => None

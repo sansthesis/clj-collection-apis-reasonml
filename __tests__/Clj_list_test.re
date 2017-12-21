@@ -197,68 +197,68 @@ let () =
               |> toEqual([1, 2, 3])
           )
         }
+      );
+      describe(
+        "take",
+        () => {
+          test(
+            "should return an empty list when given an empty list",
+            () => expect([] |> Clj_list.take(10)) |> toEqual([])
+          );
+          test(
+            "should return the source list when taking more than it has",
+            () => expect([1] |> Clj_list.take(10)) |> toEqual([1])
+          );
+          test(
+            "should return the first N elements from the list",
+            () => expect([1, 2, 3, 4] |> Clj_list.take(2)) |> toEqual([1, 2])
+          )
+        }
+      );
+      describe(
+        "takeNth",
+        () => {
+          test(
+            "should return an empty list when given an empty list",
+            () => expect([] |> Clj_list.takeNth(2)) |> toEqual([])
+          );
+          test(
+            "should return the source list when N is 1",
+            () =>
+              expect([1, 2, 3] |> Clj_list.takeNth(1)) |> toEqual([1, 2, 3])
+          );
+          test(
+            "should return every Nth item in the list",
+            () => {
+              expect([1, 2, 3, 4, 5, 6, 7] |> Clj_list.takeNth(3))
+              |> toEqual([1, 4, 7])
+              |> ignore;
+              expect([1, 2, 3, 4, 5, 6] |> Clj_list.takeNth(3))
+              |> toEqual([1, 4])
+            }
+          )
+        }
+      );
+      describe(
+        "takeWhile",
+        () => {
+          test(
+            "should return an empty list when given an empty list",
+            () => expect([] |> Clj_list.takeWhile(even)) |> toEqual([])
+          );
+          test(
+            "should return an empty list when the first element is false",
+            () => expect([1, 2, 3] |> Clj_list.takeWhile(even)) |> toEqual([])
+          );
+          test(
+            "should return the prefix of the list until the predicate is false",
+            () =>
+              expect([2, 4, 6, 1, 2, 3, 4] |> Clj_list.takeWhile(even))
+              |> toEqual([2, 4, 6])
+          )
+        }
       )
       /*
-       describe(
-         "take",
-         () => {
-           test(
-             "should return an empty list when given an empty list",
-             () => expect([] |> Clj_list.take(10)) |> toEqual([])
-           );
-           test(
-             "should return the source list when taking more than it has",
-             () => expect([1] |> Clj_list.take(10)) |> toEqual([1])
-           );
-           test(
-             "should return the first N elements from the list",
-             () => expect([1, 2, 3, 4] |> Clj_list.take(2)) |> toEqual([1, 2])
-           )
-         }
-       );
-       describe(
-         "takeNth",
-         () => {
-           test(
-             "should return an empty list when given an empty list",
-             () => expect([] |> Clj_list.takeNth(2)) |> toEqual([])
-           );
-           test(
-             "should return the source list when N is 1",
-             () =>
-               expect([1, 2, 3] |> Clj_list.takeNth(1)) |> toEqual([1, 2, 3])
-           );
-           test(
-             "should return every Nth item in the list",
-             () => {
-               expect([1, 2, 3, 4, 5, 6, 7] |> Clj_list.takeNth(3))
-               |> toEqual([1, 4, 7])
-               |> ignore;
-               expect([1, 2, 3, 4, 5, 6] |> Clj_list.takeNth(3))
-               |> toEqual([1, 4])
-             }
-           )
-         }
-       );
-       describe(
-         "takeWhile",
-         () => {
-           test(
-             "should return an empty list when given an empty list",
-             () => expect([] |> Clj_list.takeWhile(even)) |> toEqual([])
-           );
-           test(
-             "should return an empty list when the first element is false",
-             () => expect([1, 2, 3] |> Clj_list.takeWhile(even)) |> toEqual([])
-           );
-           test(
-             "should return the prefix of the list until the predicate is false",
-             () =>
-               expect([2, 4, 6, 1, 2, 3, 4] |> Clj_list.takeWhile(even))
-               |> toEqual([2, 4, 6])
-           )
-         }
-       );
        describe(
          "butLast",
          () => {
