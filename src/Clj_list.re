@@ -18,23 +18,20 @@ let next = (list) =>
   };
 
 let cons = (item, list) => List.append([item], list);
-/* O(n^2) runtime :-( https://github.com/jasonrose/clj-collection-apis-reasonml/issues/1 */
-/*
- let distinct = (list) => {
-   let listContains = (item, list) =>
-     List.fold_left((acc, x) => acc || x == item, false, list);
-   List.fold_left(
-     (acc, item) =>
-       if (listContains(item, acc)) {
-         acc
-       } else {
-         List.append(acc, [item])
-       },
-     [],
-     list
-   )
- };
 
+/* O(n^2) runtime :-( https://github.com/jasonrose/clj-collection-apis-reasonml/issues/1 */
+let distinct = (list) =>
+  List.fold_left(
+    (acc, item) =>
+      if (List.mem(item, acc)) {
+        acc
+      } else {
+        List.append(acc, [item])
+      },
+    [],
+    list
+  );
+/*
  let remove = (predicate, list) =>
    List.fold_left(
      (acc, item) =>

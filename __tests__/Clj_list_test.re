@@ -72,34 +72,35 @@ let () =
             () => expect([] |> Clj_list.next) |> toEqual(None)
           )
         }
+      );
+      describe(
+        "cons",
+        () =>
+          test(
+            "should return a new list with an item at the front",
+            () => {
+              expect([] |> Clj_list.cons(1)) |> toEqual([1]) |> ignore;
+              expect(["b", "c"] |> Clj_list.cons("a"))
+              |> toEqual(["a", "b", "c"])
+            }
+          )
+      );
+      describe(
+        "distinct",
+        () => {
+          test(
+            "should return an empty list when given an empty list",
+            () => expect([] |> Clj_list.distinct) |> toEqual([])
+          );
+          test(
+            "should return an list with no duplicate elements",
+            () =>
+              expect([1, 2, 1, 1, 2, 3] |> Clj_list.distinct)
+              |> toEqual([1, 2, 3])
+          )
+        }
       )
       /*
-       describe(
-         "cons",
-         () =>
-           test(
-             "should return a new list with an item at the front",
-             () => {
-               expect([] |> Clj_list.cons(1)) |> toEqual([1]) |> ignore;
-               expect(["b"] |> Clj_list.cons("a")) |> toEqual(["a", "b"])
-             }
-           )
-       );
-       describe(
-         "distinct",
-         () => {
-           test(
-             "should return an empty list when given an empty list",
-             () => expect([] |> Clj_list.distinct) |> toEqual([])
-           );
-           test(
-             "should return an list with no duplicate elements",
-             () =>
-               expect([1, 2, 1, 1, 2, 3] |> Clj_list.distinct)
-               |> toEqual([1, 2, 3])
-           )
-         }
-       );
        describe(
          "remove",
          () => {
