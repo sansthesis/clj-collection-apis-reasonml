@@ -127,14 +127,19 @@ let takeWhile = (predicate, list) =>
     list
   )
   |> snd;
-/*
- let butLast = (list) =>
-   switch (List.length(list)) {
-   | 0 => None
-   | 1 => None
-   | _ => Some(List.sub(list, 0, List.length(list) - 1))
-   };
 
+let rec butLast = (list) =>
+  switch list {
+  | [] => None
+  | [_] => None
+  | [h, ...rest] =>
+    let l = butLast(rest);
+    switch l {
+    | None => Some([h])
+    | Some(remainder) => Some(List.append([h], remainder))
+    }
+  };
+/*
  let dropLast = (n, list) => {
    let remainder = List.length(list) - n;
    if (remainder < 0) {
@@ -143,7 +148,8 @@ let takeWhile = (predicate, list) =>
      List.sub(list, 0, remainder)
    }
  };
-
+ */
+/*
  let reverse = (list) => {
    let length = List.length(list) - 1;
    if (length > 0) {

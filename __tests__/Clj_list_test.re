@@ -257,26 +257,31 @@ let () =
               |> toEqual([2, 4, 6])
           )
         }
+      );
+      describe(
+        "butLast",
+        () => {
+          test(
+            "should return None when given an empty list",
+            () => expect([] |> Clj_list.butLast) |> toEqual(None)
+          );
+          test(
+            "should return None when given an list with one element",
+            () => expect([1] |> Clj_list.butLast) |> toEqual(None)
+          );
+          test(
+            "should return an list of every element but the last in it",
+            () => {
+              expect([1, 2, 3] |> Clj_list.butLast)
+              |> toEqual(Some([1, 2]))
+              |> ignore;
+              expect([1, 2, 3, 4, 5] |> Clj_list.butLast)
+              |> toEqual(Some([1, 2, 3, 4]))
+            }
+          )
+        }
       )
       /*
-       describe(
-         "butLast",
-         () => {
-           test(
-             "should return None when given an empty list",
-             () => expect([] |> Clj_list.butLast) |> toEqual(None)
-           );
-           test(
-             "should return None when given an list with one element",
-             () => expect([1] |> Clj_list.butLast) |> toEqual(None)
-           );
-           test(
-             "should return an list of every element but the last in it",
-             () =>
-               expect([1, 2, 3] |> Clj_list.butLast) |> toEqual(Some([1, 2]))
-           )
-         }
-       );
        describe(
          "dropLast",
          () => {
@@ -300,6 +305,8 @@ let () =
            )
          }
        );
+       */
+      /*
        describe(
          "reverse",
          () => {
