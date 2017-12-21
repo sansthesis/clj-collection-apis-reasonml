@@ -474,25 +474,25 @@ let () =
               |> toEqual([[1], [2, 4, 6, 8], [1, 3], [2], [3]])
           )
         }
+      );
+      describe(
+        "second",
+        () => {
+          test(
+            "should return None when given an empty list",
+            () => expect([] |> Clj_list.second) |> toEqual(None)
+          );
+          test(
+            "should return None for an list of one element",
+            () => expect([1] |> Clj_list.second) |> toEqual(None)
+          );
+          test(
+            "should return the second element in an list",
+            () => expect([1, 5] |> Clj_list.second) |> toEqual(Some(5))
+          )
+        }
       )
       /*
-       describe(
-         "second",
-         () => {
-           test(
-             "should return None when given an empty list",
-             () => expect([] |> Clj_list.second) |> toEqual(None)
-           );
-           test(
-             "should return None for an list of one element",
-             () => expect([1] |> Clj_list.second) |> toEqual(None)
-           );
-           test(
-             "should return the second element in an list",
-             () => expect([1, 5] |> Clj_list.second) |> toEqual(Some(5))
-           )
-         }
-       );
        describe(
          "nth",
          () => {

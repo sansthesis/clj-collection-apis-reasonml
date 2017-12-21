@@ -215,14 +215,14 @@ let partitionBy = (fn, list) =>
       );
     List.append(value, [r])
   };
-/*
- let second = (list) =>
-   if (List.length(list) < 2) {
-     None
-   } else {
-     Some(list[1])
-   };
 
+let second = (list) =>
+  switch list {
+  | [] => None
+  | [_] => None
+  | [_, ...rest] => Some(List.hd(rest))
+  };
+/*
  let nth = (index, defaultValue, list) =>
    if (index >= 0 && index < List.length(list)) {
      list[index]
