@@ -665,45 +665,45 @@ let () =
             () => expect(Clj_list.repeat(3, 4)) |> toEqual([4, 4, 4])
           )
         }
+      );
+      describe(
+        "range",
+        () => {
+          test(
+            "should return an empty list when the start matches the end",
+            () => expect(Clj_list.range(1, 1)) |> toEqual([])
+          );
+          test(
+            "should return an list of the start when the end is 1 higher than the start",
+            () => expect(Clj_list.range(1, 2)) |> toEqual([1])
+          );
+          test(
+            "should return an list from start to end - 1",
+            () => expect(Clj_list.range(1, 5)) |> toEqual([1, 2, 3, 4])
+          )
+        }
+      );
+      describe(
+        "dedupe",
+        () => {
+          test(
+            "should return an empty list when given an empty list",
+            () => expect([] |> Clj_list.dedupe) |> toEqual([])
+          );
+          test(
+            "should return the source list when given an list without consecutive values",
+            () =>
+              expect([1, 2, 3, 1] |> Clj_list.dedupe) |> toEqual([1, 2, 3, 1])
+          );
+          test(
+            "should return an list without consecutive duplicate values",
+            () =>
+              expect([1, 1, 2, 2, 3, 1, 1] |> Clj_list.dedupe)
+              |> toEqual([1, 2, 3, 1])
+          )
+        }
       )
       /*
-       describe(
-         "range",
-         () => {
-           test(
-             "should return an empty list when the start matches the end",
-             () => expect(Clj_list.range(1, 1)) |> toEqual([])
-           );
-           test(
-             "should return an list of the start when the end is 1 higher than the start",
-             () => expect(Clj_list.range(1, 2)) |> toEqual([1])
-           );
-           test(
-             "should return an list from start to end - 1",
-             () => expect(Clj_list.range(1, 5)) |> toEqual([1, 2, 3, 4])
-           )
-         }
-       );
-       describe(
-         "dedupe",
-         () => {
-           test(
-             "should return an empty list when given an empty list",
-             () => expect([] |> Clj_list.dedupe) |> toEqual([])
-           );
-           test(
-             "should return the source list when given an list without consecutive values",
-             () =>
-               expect([1, 2, 3, 1] |> Clj_list.dedupe) |> toEqual([1, 2, 3, 1])
-           );
-           test(
-             "should return an list without consecutive duplicate values",
-             () =>
-               expect([1, 1, 2, 2, 3, 1, 1] |> Clj_list.dedupe)
-               |> toEqual([1, 2, 3, 1])
-           )
-         }
-       );
        describe(
          "conj",
          () => {

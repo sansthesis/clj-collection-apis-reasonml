@@ -291,38 +291,39 @@ let rec repeat = (n, value) =>
   } else {
     List.append([value], repeat(n - 1, value))
   };
+
+let rec range = (start, _end) =>
+  if (start >= _end) {
+    []
+  } else {
+    List.append([start], range(start + 1, _end))
+  };
+
+let dedupe = (list) =>
+  switch list {
+  | [] => []
+  | [a] => [a]
+  | [a, ...rest] =>
+    let (lastItemInArray, itemLastInserted, arr) =
+      List.fold_left(
+        (acc, item) => {
+          let (current, _, arr) = acc;
+          if (current == item) {
+            acc
+          } else {
+            (item, current, List.append(arr, [current]))
+          }
+        },
+        (a, a, []),
+        rest
+      );
+    if (lastItemInArray == itemLastInserted) {
+      arr
+    } else {
+      List.append(arr, [lastItemInArray])
+    }
+  };
 /*
- let rec range = (start, _end) =>
-   if (start >= _end) {
-     []
-   } else {
-     List.append([start], range(start + 1, _end))
-   };
-
- let dedupe = (list) =>
-   if (List.length(list) == 0) {
-     []
-   } else {
-     let (lastItemInArray, itemLastInserted, arr) =
-       List.fold_left(
-         (acc, item) => {
-           let (current, _, arr) = acc;
-           if (current == item) {
-             acc
-           } else {
-             (item, current, List.append(arr, [current]))
-           }
-         },
-         (list[0], list[0], []),
-         list
-       );
-     if (lastItemInArray == itemLastInserted) {
-       arr
-     } else {
-       List.append(arr, [lastItemInArray])
-     }
-   };
-
  let conj = (list, item) =>
    switch list {
    | None => [item]
