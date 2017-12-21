@@ -31,30 +31,30 @@ let distinct = (list) =>
     [],
     list
   );
+
+let remove = (predicate, list) =>
+  List.fold_left(
+    (acc, item) =>
+      if (predicate(item)) {
+        acc
+      } else {
+        List.append(acc, [item])
+      },
+    [],
+    list
+  );
+
+let keep = (f, list) =>
+  List.fold_left(
+    (acc, item) =>
+      switch (f(item)) {
+      | Some(value) => List.append(acc, [value])
+      | None => acc
+      },
+    [],
+    list
+  );
 /*
- let remove = (predicate, list) =>
-   List.fold_left(
-     (acc, item) =>
-       if (predicate(item)) {
-         acc
-       } else {
-         List.append(acc, [item])
-       },
-     [],
-     list
-   );
-
- let keep = (f, list) =>
-   List.fold_left(
-     (acc, item) =>
-       switch (f(item)) {
-       | Some(value) => List.append(acc, [value])
-       | None => acc
-       },
-     [],
-     list
-   );
-
  let interpose = (delimiter, list) =>
    switch (List.length(list)) {
    | 0 => []

@@ -99,51 +99,51 @@ let () =
               |> toEqual([1, 2, 3])
           )
         }
+      );
+      describe(
+        "remove",
+        () => {
+          test(
+            "should return an empty list when given an empty list",
+            () => expect([] |> Clj_list.remove(even)) |> toEqual([])
+          );
+          test(
+            "should return an empty list when no elements match",
+            () => expect([2] |> Clj_list.remove(even)) |> toEqual([])
+          );
+          test(
+            "should return an list with only elements that don't match",
+            () =>
+              expect([2, 1, 3, 4] |> Clj_list.remove(even)) |> toEqual([1, 3])
+          )
+        }
+      );
+      describe(
+        "keep",
+        () => {
+          let contrived = (number) =>
+            if (number mod 2 == 0) {
+              Some(number + 10)
+            } else {
+              None
+            };
+          test(
+            "should return an empty list when given an empty list",
+            () => expect([] |> Clj_list.keep(contrived)) |> toEqual([])
+          );
+          test(
+            "should remove all values that the fn returns None for",
+            () => expect([1, 3, 5] |> Clj_list.keep(contrived)) |> toEqual([])
+          );
+          test(
+            "should retain values that the fn returns Some(value) for",
+            () =>
+              expect([2, 1, 4, 6, 3, 5, 8] |> Clj_list.keep(contrived))
+              |> toEqual([12, 14, 16, 18])
+          )
+        }
       )
       /*
-       describe(
-         "remove",
-         () => {
-           test(
-             "should return an empty list when given an empty list",
-             () => expect([] |> Clj_list.remove(even)) |> toEqual([])
-           );
-           test(
-             "should return an empty list when no elements match",
-             () => expect([2] |> Clj_list.remove(even)) |> toEqual([])
-           );
-           test(
-             "should return an list with only elements that don't match",
-             () =>
-               expect([2, 1, 3, 4] |> Clj_list.remove(even)) |> toEqual([1, 3])
-           )
-         }
-       );
-       describe(
-         "keep",
-         () => {
-           let contrived = (number) =>
-             if (number mod 2 == 0) {
-               Some(number + 10)
-             } else {
-               None
-             };
-           test(
-             "should return an empty list when given an empty list",
-             () => expect([] |> Clj_list.keep(contrived)) |> toEqual([])
-           );
-           test(
-             "should remove all values that the fn returns None for",
-             () => expect([1, 3, 5] |> Clj_list.keep(contrived)) |> toEqual([])
-           );
-           test(
-             "should retain values that the fn returns Some(value) for",
-             () =>
-               expect([2, 1, 4, 6, 3, 5, 8] |> Clj_list.keep(contrived))
-               |> toEqual([12, 14, 16, 18])
-           )
-         }
-       );
        describe(
          "interpose",
          () => {
