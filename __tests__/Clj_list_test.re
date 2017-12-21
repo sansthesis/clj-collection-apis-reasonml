@@ -491,25 +491,25 @@ let () =
             () => expect([1, 5] |> Clj_list.second) |> toEqual(Some(5))
           )
         }
+      );
+      describe(
+        "nth",
+        () => {
+          test(
+            "should return the default value when given an empty list",
+            () => expect([] |> Clj_list.nth(0, 33)) |> toEqual(33)
+          );
+          test(
+            "should return the default value when given an empty list",
+            () => expect([] |> Clj_list.nth(0, 33)) |> toEqual(33)
+          );
+          test(
+            "should return the element at the specified index if it is within range",
+            () => expect([1, 2, 3] |> Clj_list.nth(0, 33)) |> toEqual(1)
+          )
+        }
       )
       /*
-       describe(
-         "nth",
-         () => {
-           test(
-             "should return the default value when given an empty list",
-             () => expect([] |> Clj_list.nth(0, 33)) |> toEqual(33)
-           );
-           test(
-             "should return the default value when given an empty list",
-             () => expect([] |> Clj_list.nth(0, 33)) |> toEqual(33)
-           );
-           test(
-             "should return the element at the specified index if it is within range",
-             () => expect([1, 2, 3] |> Clj_list.nth(0, 33)) |> toEqual(1)
-           )
-         }
-       );
        describe(
          "last",
          () => {

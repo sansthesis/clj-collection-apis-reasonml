@@ -222,14 +222,16 @@ let second = (list) =>
   | [_] => None
   | [_, ...rest] => Some(List.hd(rest))
   };
-/*
- let nth = (index, defaultValue, list) =>
-   if (index >= 0 && index < List.length(list)) {
-     list[index]
-   } else {
-     defaultValue
-   };
 
+let rec nth = (index, defaultValue, list) =>
+  switch (list, index) {
+  | ([], _) => defaultValue
+  | ([a], 0) => a
+  | ([_], _) => defaultValue
+  | ([a, ..._], 0) => a
+  | ([_, ...rest], n) => nth(n - 1, defaultValue, rest)
+  };
+/*
  let last = (list) =>
    if (List.length(list) == 0) {
      None
