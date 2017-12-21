@@ -159,24 +159,24 @@ let splitWith = (predicate, list) => [
   takeWhile(predicate, list),
   dropWhile(predicate, list)
 ];
-/*
- let partition = (n, list) =>
-   if (n > List.length(list)) {
-     []
-   } else {
-     List.fold_left(
-       (acc, item) =>
-         if (acc |> fst |> List.length == n - 1) {
-           ([], List.append(snd(acc), [List.append(fst(acc), [item])]))
-         } else {
-           (List.append(fst(acc), [item]), snd(acc))
-         },
-       ([], []),
-       list
-     )
-     |> snd
-   };
 
+let partition = (n, list) => {
+  let (_, _, output) =
+    List.fold_left(
+      (acc, item) => {
+        let (remainder, remainderSize, partitions) = acc;
+        if (remainderSize == n - 1) {
+          ([], 0, List.append(partitions, [List.append(remainder, [item])]))
+        } else {
+          (List.append(remainder, [item]), remainderSize + 1, partitions)
+        }
+      },
+      ([], 0, []),
+      list
+    );
+  output
+};
+/*
  let partitionAll = (n, list) => {
    let (remainder, partitions) =
      List.fold_left(

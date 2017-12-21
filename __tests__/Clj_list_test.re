@@ -385,39 +385,39 @@ let () =
               expect([2, 1] |> Clj_list.splitWith(even)) |> toEqual([[2], [1]])
           )
         }
+      );
+      describe(
+        "partition",
+        () => {
+          test(
+            "should return an empty list when given an empty list",
+            () => expect([] |> Clj_list.partition(5)) |> toEqual([])
+          );
+          test(
+            "should return an empty list when partitioning by more than the list's size",
+            () => expect([1, 2, 3] |> Clj_list.partition(5)) |> toEqual([])
+          );
+          test(
+            "should return an list of lists of single elements when partitioning by 1",
+            () =>
+              expect([1, 2, 3] |> Clj_list.partition(1))
+              |> toEqual([[1], [2], [3]])
+          );
+          test(
+            "should return an list of lists of elements each of size N",
+            () =>
+              expect([1, 2, 3, 4] |> Clj_list.partition(2))
+              |> toEqual([[1, 2], [3, 4]])
+          );
+          test(
+            "should lose the items at the end that don't fill the last partition of size N",
+            () =>
+              expect([1, 2, 3, 4] |> Clj_list.partition(3))
+              |> toEqual([[1, 2, 3]])
+          )
+        }
       )
       /*
-       describe(
-         "partition",
-         () => {
-           test(
-             "should return an empty list when given an empty list",
-             () => expect([] |> Clj_list.partition(5)) |> toEqual([])
-           );
-           test(
-             "should return an empty list when partitioning by more than the list's size",
-             () => expect([1, 2, 3] |> Clj_list.partition(5)) |> toEqual([])
-           );
-           test(
-             "should return an list of lists of single elements when partitioning by 1",
-             () =>
-               expect([1, 2, 3] |> Clj_list.partition(1))
-               |> toEqual([[1], [2], [3]])
-           );
-           test(
-             "should return an list of lists of elements each of size N",
-             () =>
-               expect([1, 2, 3, 4] |> Clj_list.partition(2))
-               |> toEqual([[1, 2], [3, 4]])
-           );
-           test(
-             "should lose the items at the end that don't fill the last partition of size N",
-             () =>
-               expect([1, 2, 3, 4] |> Clj_list.partition(3))
-               |> toEqual([[1, 2, 3]])
-           )
-         }
-       );
        describe(
          "partitionAll",
          () => {
