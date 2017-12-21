@@ -416,66 +416,66 @@ let () =
               |> toEqual([[1, 2, 3]])
           )
         }
+      );
+      describe(
+        "partitionAll",
+        () => {
+          test(
+            "should return an empty list when given an empty list",
+            () => expect([] |> Clj_list.partitionAll(5)) |> toEqual([])
+          );
+          test(
+            "should return an list of an list of all elements in the source list when partitioning by more than the list's size",
+            () =>
+              expect([1, 2, 3] |> Clj_list.partitionAll(5))
+              |> toEqual([[1, 2, 3]])
+          );
+          test(
+            "should return an list of lists of single elements when partitioning by 1",
+            () =>
+              expect([1, 2, 3] |> Clj_list.partitionAll(1))
+              |> toEqual([[1], [2], [3]])
+          );
+          test(
+            "should return an list of lists of elements each of size N",
+            () =>
+              expect([1, 2, 3, 4] |> Clj_list.partitionAll(2))
+              |> toEqual([[1, 2], [3, 4]])
+          );
+          test(
+            "should include a smaller partition if the last items don't fill a partition of size N",
+            () =>
+              expect([1, 2, 3, 4] |> Clj_list.partitionAll(3))
+              |> toEqual([[1, 2, 3], [4]])
+          )
+        }
+      );
+      describe(
+        "partitionBy",
+        () => {
+          test(
+            "should return an empty list when given an empty list",
+            () => expect([] |> Clj_list.partitionBy(even)) |> toEqual([])
+          );
+          test(
+            "should return an list of an list of a single element when given an list of one element",
+            () => expect([1] |> Clj_list.partitionBy(even)) |> toEqual([[1]])
+          );
+          test(
+            "should return an list of lists of single elements when partitioning an list of ascending numbers by the identify function",
+            () =>
+              expect([1, 2, 3] |> Clj_list.partitionBy(identity))
+              |> toEqual([[1], [2], [3]])
+          );
+          test(
+            "should return an list of lists of elements whenever the function value doesn't change",
+            () =>
+              expect([1, 2, 4, 6, 8, 1, 3, 2, 3] |> Clj_list.partitionBy(even))
+              |> toEqual([[1], [2, 4, 6, 8], [1, 3], [2], [3]])
+          )
+        }
       )
       /*
-       describe(
-         "partitionAll",
-         () => {
-           test(
-             "should return an empty list when given an empty list",
-             () => expect([] |> Clj_list.partitionAll(5)) |> toEqual([])
-           );
-           test(
-             "should return an list of an list of all elements in the source list when partitioning by more than the list's size",
-             () =>
-               expect([1, 2, 3] |> Clj_list.partitionAll(5))
-               |> toEqual([[1, 2, 3]])
-           );
-           test(
-             "should return an list of lists of single elements when partitioning by 1",
-             () =>
-               expect([1, 2, 3] |> Clj_list.partitionAll(1))
-               |> toEqual([[1], [2], [3]])
-           );
-           test(
-             "should return an list of lists of elements each of size N",
-             () =>
-               expect([1, 2, 3, 4] |> Clj_list.partitionAll(2))
-               |> toEqual([[1, 2], [3, 4]])
-           );
-           test(
-             "should include a smaller partition if the last items don't fill a partition of size N",
-             () =>
-               expect([1, 2, 3, 4] |> Clj_list.partitionAll(3))
-               |> toEqual([[1, 2, 3], [4]])
-           )
-         }
-       );
-       describe(
-         "partitionBy",
-         () => {
-           test(
-             "should return an empty list when given an empty list",
-             () => expect([] |> Clj_list.partitionBy(even)) |> toEqual([])
-           );
-           test(
-             "should return an list of an list of a single element when given an list of one element",
-             () => expect([1] |> Clj_list.partitionBy(even)) |> toEqual([[1]])
-           );
-           test(
-             "should return an list of lists of single elements when partitioning an list of ascending numbers by the identify function",
-             () =>
-               expect([1, 2, 3] |> Clj_list.partitionBy(identity))
-               |> toEqual([[1], [2], [3]])
-           );
-           test(
-             "should return an list of lists of elements whenever the function value doesn't change",
-             () =>
-               expect([1, 2, 4, 6, 8, 1, 3, 2, 3] |> Clj_list.partitionBy(even))
-               |> toEqual([[1], [2, 4, 6, 8], [1, 3], [2], [3]])
-           )
-         }
-       );
        describe(
          "second",
          () => {

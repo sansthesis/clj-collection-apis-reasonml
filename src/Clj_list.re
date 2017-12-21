@@ -194,28 +194,28 @@ let partitionAll = (n, list) => {
   | _ => List.append(partitions, [remainder])
   }
 };
-/*
- let partitionBy = (fn, list) =>
-   if (List.length(list) == 0) {
-     []
-   } else {
-     let (_, r, value) =
-       List.fold_left(
-         (acc, item) => {
-           let (fnValue, remainder, partitions) = acc;
-           let newFnValue = fn(item);
-           if (fnValue == newFnValue) {
-             (newFnValue, List.append(remainder, [item]), partitions)
-           } else {
-             (newFnValue, [item], List.append(partitions, [remainder]))
-           }
-         },
-         (fn(list[0]), [list[0]], []),
-         rest(list)
-       );
-     List.append(value, [r])
-   };
 
+let partitionBy = (fn, list) =>
+  switch list {
+  | [] => []
+  | [_, ..._] =>
+    let (_, r, value) =
+      List.fold_left(
+        (acc, item) => {
+          let (fnValue, remainder, partitions) = acc;
+          let newFnValue = fn(item);
+          if (fnValue == newFnValue) {
+            (newFnValue, List.append(remainder, [item]), partitions)
+          } else {
+            (newFnValue, [item], List.append(partitions, [remainder]))
+          }
+        },
+        (fn(List.hd(list)), [List.hd(list)], []),
+        rest(list)
+      );
+    List.append(value, [r])
+  };
+/*
  let second = (list) =>
    if (List.length(list) < 2) {
      None
