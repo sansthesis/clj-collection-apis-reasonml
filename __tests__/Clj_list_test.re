@@ -702,44 +702,42 @@ let () =
               |> toEqual([1, 2, 3, 1])
           )
         }
+      );
+      describe(
+        "conj",
+        () => {
+          test(
+            "should return an list of one element when given None",
+            () => expect(12 |> Clj_list.conj(None)) |> toEqual([12])
+          );
+          test(
+            "should return an list of one element when given an empty list",
+            () => expect(12 |> Clj_list.conj(Some([]))) |> toEqual([12])
+          );
+          test(
+            "should return add the item to the beginning of an existing list",
+            () =>
+              expect(12 |> Clj_list.conj(Some([3, 4, 10])))
+              |> toEqual([12, 3, 4, 10])
+          )
+        }
+      );
+      describe(
+        "contains",
+        () => {
+          test(
+            "should return false when given an empty list",
+            () => expect(Clj_list.contains([], 0)) |> toEqual(false)
+          );
+          test(
+            "should return false when the given index is not within the list's bounds",
+            () => expect(Clj_list.contains([1, 2, 3], 7)) |> toEqual(false)
+          );
+          test(
+            "should return true when the given index is within the list's bounds",
+            () => expect(Clj_list.contains([1, 2, 3], 1)) |> toEqual(true)
+          )
+        }
       )
-      /*
-       describe(
-         "conj",
-         () => {
-           test(
-             "should return an list of one element when given None",
-             () => expect(12 |> Clj_list.conj(None)) |> toEqual([12])
-           );
-           test(
-             "should return an list of one element when given an empty list",
-             () => expect(12 |> Clj_list.conj(Some([]))) |> toEqual([12])
-           );
-           test(
-             "should return add the item to the end of an existing list",
-             () =>
-               expect(12 |> Clj_list.conj(Some([3, 4, 10])))
-               |> toEqual([3, 4, 10, 12])
-           )
-         }
-       );
-       describe(
-         "contains",
-         () => {
-           test(
-             "should return false when given an empty list",
-             () => expect(Clj_list.contains([], 0)) |> toEqual(false)
-           );
-           test(
-             "should return false when the given index is not within the list's bounds",
-             () => expect(Clj_list.contains([1, 2, 3], 7)) |> toEqual(false)
-           );
-           test(
-             "should return true when the given index is within the list's bounds",
-             () => expect(Clj_list.contains([1, 2, 3], 1)) |> toEqual(true)
-           )
-         }
-       )
-       */
     }
   );

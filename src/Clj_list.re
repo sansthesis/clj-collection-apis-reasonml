@@ -323,12 +323,18 @@ let dedupe = (list) =>
       List.append(arr, [lastItemInArray])
     }
   };
-/*
- let conj = (list, item) =>
-   switch list {
-   | None => [item]
-   | Some(arr) => List.append(arr, [item])
-   };
 
- let contains = (list, index) => index >= 0 && index < List.length(list);
- */
+let conj = (list, item) =>
+  switch list {
+  | None => [item]
+  | Some(l) => List.append([item], l)
+  };
+
+let rec contains = (list, index) =>
+  switch (list, index) {
+  | ([], _) => false
+  | ([_], 0) => true
+  | ([_], _) => false
+  | ([_, ..._], 0) => true
+  | ([_, ...rest], n) => contains(rest, n - 1)
+  };
