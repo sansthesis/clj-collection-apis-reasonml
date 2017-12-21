@@ -508,24 +508,24 @@ let () =
             () => expect([1, 2, 3] |> Clj_list.nth(0, 33)) |> toEqual(1)
           )
         }
+      );
+      describe(
+        "last",
+        () => {
+          test(
+            "should return None when given an empty list",
+            () => expect([] |> Clj_list.last) |> toEqual(None)
+          );
+          test(
+            "should return the final item in an list",
+            () => {
+              expect([1] |> Clj_list.last) |> toEqual(Some(1)) |> ignore;
+              expect([1, 2] |> Clj_list.last) |> toEqual(Some(2))
+            }
+          )
+        }
       )
       /*
-       describe(
-         "last",
-         () => {
-           test(
-             "should return None when given an empty list",
-             () => expect([] |> Clj_list.last) |> toEqual(None)
-           );
-           test(
-             "should return the final item in an list",
-             () => {
-               expect([1] |> Clj_list.last) |> toEqual(Some(1)) |> ignore;
-               expect([1, 2] |> Clj_list.last) |> toEqual(Some(2))
-             }
-           )
-         }
-       );
        describe(
          "notEmpty",
          () => {

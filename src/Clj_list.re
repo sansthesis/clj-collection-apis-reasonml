@@ -231,14 +231,14 @@ let rec nth = (index, defaultValue, list) =>
   | ([a, ..._], 0) => a
   | ([_, ...rest], n) => nth(n - 1, defaultValue, rest)
   };
-/*
- let last = (list) =>
-   if (List.length(list) == 0) {
-     None
-   } else {
-     Some(list[List.length(list) - 1])
-   };
 
+let rec last = (list) =>
+  switch list {
+  | [] => None
+  | [a] => Some(a)
+  | [_, ...rest] => last(rest)
+  };
+/*
  let notEmpty = (list) =>
    if (List.length(list) == 0) {
      None
