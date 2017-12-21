@@ -54,47 +54,41 @@ let keep = (f, list) =>
     [],
     list
   );
+
+let rec interpose = (delimiter, list) =>
+  switch list {
+  | [] => []
+  | [_] => list
+  | [head, ...rest] =>
+    List.append([head, delimiter], interpose(delimiter, rest))
+  };
+
+let drop = (n, list) =>
+  List.fold_left(
+    (acc, item) =>
+      if (fst(acc) > 0) {
+        (fst(acc) - 1, snd(acc))
+      } else {
+        (0, List.append(snd(acc), [item]))
+      },
+    (n, []),
+    list
+  )
+  |> snd;
+
+let dropWhile = (predicate, list) =>
+  List.fold_left(
+    (acc, item) =>
+      if (fst(acc) && predicate(item)) {
+        (fst(acc), snd(acc))
+      } else {
+        (false, List.append(snd(acc), [item]))
+      },
+    (true, []),
+    list
+  )
+  |> snd;
 /*
- let interpose = (delimiter, list) =>
-   switch (List.length(list)) {
-   | 0 => []
-   | 1 => list
-   | _ =>
-     let fencepost =
-       List.fold_left(
-         (acc, item) => List.append(acc, [item, delimiter]),
-         [],
-         list
-       );
-     List.sub(fencepost, 0, List.length(fencepost) - 1)
-   };
-
- let drop = (n, list) =>
-   List.fold_left(
-     (acc, item) =>
-       if (fst(acc) > 0) {
-         (fst(acc) - 1, snd(acc))
-       } else {
-         (0, List.append(snd(acc), [item]))
-       },
-     (n, []),
-     list
-   )
-   |> snd;
-
- let dropWhile = (predicate, list) =>
-   List.fold_left(
-     (acc, item) =>
-       if (fst(acc) && predicate(item)) {
-         (fst(acc), snd(acc))
-       } else {
-         (false, List.append(snd(acc), [item]))
-       },
-     (true, []),
-     list
-   )
-   |> snd;
-
  let take = (n, list) =>
    List.fold_left(
      (acc, item) =>

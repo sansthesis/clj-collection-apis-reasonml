@@ -142,57 +142,63 @@ let () =
               |> toEqual([12, 14, 16, 18])
           )
         }
+      );
+      describe(
+        "interpose",
+        () => {
+          test(
+            "should return an empty list when given an empty list",
+            () => expect([] |> Clj_list.interpose(1)) |> toEqual([])
+          );
+          test(
+            "should insert the delimiter between elements",
+            () => {
+              expect([0, 2] |> Clj_list.interpose(1))
+              |> toEqual([0, 1, 2])
+              |> ignore;
+              expect([0, 2, 4] |> Clj_list.interpose(1))
+              |> toEqual([0, 1, 2, 1, 4])
+            }
+          )
+        }
+      );
+      describe(
+        "drop",
+        () => {
+          test(
+            "should return an empty list when given an empty list",
+            () => expect([] |> Clj_list.drop(1)) |> toEqual([])
+          );
+          test(
+            "should return an empty list when dropping more than it has",
+            () => expect([1] |> Clj_list.drop(10)) |> toEqual([])
+          );
+          test(
+            "should remove the first N elements",
+            () => expect([1, 2, 3, 4] |> Clj_list.drop(2)) |> toEqual([3, 4])
+          )
+        }
+      );
+      describe(
+        "dropWhile",
+        () => {
+          test(
+            "should return an empty list when given an empty list",
+            () => expect([] |> Clj_list.dropWhile(even)) |> toEqual([])
+          );
+          test(
+            "should return the source list when the first result is false",
+            () => expect([1, 2] |> Clj_list.dropWhile(even)) |> toEqual([1, 2])
+          );
+          test(
+            "should return the suffix of list starting at the index of the first false result",
+            () =>
+              expect([4, 2, 1, 2, 3] |> Clj_list.dropWhile(even))
+              |> toEqual([1, 2, 3])
+          )
+        }
       )
       /*
-       describe(
-         "interpose",
-         () => {
-           test(
-             "should return an empty list when given an empty list",
-             () => expect([] |> Clj_list.interpose(1)) |> toEqual([])
-           );
-           test(
-             "should insert the delimiter between elements",
-             () => expect([0, 2] |> Clj_list.interpose(1)) |> toEqual([0, 1, 2])
-           )
-         }
-       );
-       describe(
-         "drop",
-         () => {
-           test(
-             "should return an empty list when given an empty list",
-             () => expect([] |> Clj_list.drop(1)) |> toEqual([])
-           );
-           test(
-             "should return an empty list when dropping more than it has",
-             () => expect([1] |> Clj_list.drop(10)) |> toEqual([])
-           );
-           test(
-             "should remove the first N elements",
-             () => expect([1, 2, 3, 4] |> Clj_list.drop(2)) |> toEqual([3, 4])
-           )
-         }
-       );
-       describe(
-         "dropWhile",
-         () => {
-           test(
-             "should return an empty list when given an empty list",
-             () => expect([] |> Clj_list.dropWhile(even)) |> toEqual([])
-           );
-           test(
-             "should return the source list when the first result is false",
-             () => expect([1, 2] |> Clj_list.dropWhile(even)) |> toEqual([1, 2])
-           );
-           test(
-             "should return the suffix of list starting at the index of the first false result",
-             () =>
-               expect([4, 2, 1, 2, 3] |> Clj_list.dropWhile(even))
-               |> toEqual([1, 2, 3])
-           )
-         }
-       );
        describe(
          "take",
          () => {
