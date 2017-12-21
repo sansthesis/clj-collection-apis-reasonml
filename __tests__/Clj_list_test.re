@@ -280,7 +280,7 @@ let () =
             }
           )
         }
-      )
+      );
       /*
        describe(
          "dropLast",
@@ -306,28 +306,28 @@ let () =
          }
        );
        */
+      describe(
+        "reverse",
+        () => {
+          test(
+            "should return an empty list when given an empty list",
+            () => expect([] |> Clj_list.reverse) |> toEqual([])
+          );
+          test(
+            "should return the source list when given an list of 1 element",
+            () => expect([1] |> Clj_list.reverse) |> toEqual([1])
+          );
+          test(
+            "should return an list in reverse order of the original",
+            () => {
+              expect([1, 2] |> Clj_list.reverse) |> toEqual([2, 1]) |> ignore;
+              expect([1, 2, 3, 4, 5] |> Clj_list.reverse)
+              |> toEqual([5, 4, 3, 2, 1])
+            }
+          )
+        }
+      )
       /*
-       describe(
-         "reverse",
-         () => {
-           test(
-             "should return an empty list when given an empty list",
-             () => expect([] |> Clj_list.reverse) |> toEqual([])
-           );
-           test(
-             "should return the source list when given an list of 1 element",
-             () => expect([1] |> Clj_list.reverse) |> toEqual([1])
-           );
-           test(
-             "should return an list in reverse order of the original",
-             () => {
-               expect([1, 2] |> Clj_list.reverse) |> toEqual([2, 1]) |> ignore;
-               expect([1, 2, 3, 4, 5] |> Clj_list.reverse)
-               |> toEqual([5, 4, 3, 2, 1])
-             }
-           )
-         }
-       );
        describe(
          "splitAt",
          () => {

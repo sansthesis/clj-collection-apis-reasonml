@@ -139,6 +139,7 @@ let rec butLast = (list) =>
     | Some(remainder) => Some(List.append([h], remainder))
     }
   };
+
 /*
  let dropLast = (n, list) => {
    let remainder = List.length(list) - n;
@@ -149,21 +150,8 @@ let rec butLast = (list) =>
    }
  };
  */
+let reverse = List.rev;
 /*
- let reverse = (list) => {
-   let length = List.length(list) - 1;
-   if (length > 0) {
-     for (i in 0 to length / 2) {
-       let swap = list[length - i];
-       list[length - i] = list[i];
-       list[i] = swap
-     };
-     list
-   } else {
-     list
-   }
- };
-
  let splitAt = (index, list) => [take(index, list), drop(index, list)];
 
  let splitWith = (predicate, list) => [
