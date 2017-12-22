@@ -281,31 +281,29 @@ let () =
           )
         }
       );
-      /*
-       describe(
-         "dropLast",
-         () => {
-           test(
-             "should return an empty list when given an empty list",
-             () => expect([] |> Clj_list.dropLast(5)) |> toEqual([])
-           );
-           test(
-             "should return an empty list when dropping more than the list has",
-             () => expect([1, 2] |> Clj_list.dropLast(5)) |> toEqual([])
-           );
-           test(
-             "should return the source list when dropping 0",
-             () => expect([1, 2] |> Clj_list.dropLast(0)) |> toEqual([1, 2])
-           );
-           test(
-             "should return an list of everything but the last N elements",
-             () =>
-               expect([1, 2, 3, 4, 5] |> Clj_list.dropLast(2))
-               |> toEqual([1, 2, 3])
-           )
-         }
-       );
-       */
+      describe(
+        "dropLast",
+        () => {
+          test(
+            "should return an empty list when given an empty list",
+            () => expect([] |> Clj_list.dropLast(5)) |> toEqual([])
+          );
+          test(
+            "should return an empty list when dropping more than the list has",
+            () => expect([1, 2] |> Clj_list.dropLast(5)) |> toEqual([])
+          );
+          test(
+            "should return the source list when dropping 0",
+            () => expect([1, 2] |> Clj_list.dropLast(0)) |> toEqual([1, 2])
+          );
+          test(
+            "should return an list of everything but the last N elements",
+            () =>
+              expect([1, 2, 3, 4, 5] |> Clj_list.dropLast(2))
+              |> toEqual([1, 2, 3])
+          )
+        }
+      );
       describe(
         "reverse",
         () => {

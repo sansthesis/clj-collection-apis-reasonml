@@ -163,16 +163,26 @@ let rec butLast = (list) =>
     }
   };
 
-/*
- let dropLast = (n, list) => {
-   let remainder = List.length(list) - n;
-   if (remainder < 0) {
-     []
-   } else {
-     List.sub(list, 0, remainder)
-   }
- };
- */
+let rec dropLastPrivate = (n, list) =>
+  switch list {
+  | [] => (n, [])
+  | [a] =>
+    if (n == 0) {
+      (0, [a])
+    } else {
+      (n - 1, [])
+    }
+  | [a, ...rest] =>
+    let (i, l) = dropLastPrivate(n, rest);
+    if (i == 0) {
+      (0, List.append([a], l))
+    } else {
+      (i - 1, [])
+    }
+  };
+
+let dropLast = (n, list) => dropLastPrivate(n, list) |> snd;
+
 let reverse = List.rev;
 
 let splitAt = (index, list) => [take(index, list), drop(index, list)];
