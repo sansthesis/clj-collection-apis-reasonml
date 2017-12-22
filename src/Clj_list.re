@@ -72,31 +72,31 @@ let rec interpose = (delimiter, list) =>
     List.append([head, delimiter], interpose(delimiter, rest))
   };
 
-let drop = (n, list) =>
-  List.fold_left(
-    (acc, item) =>
-      if (fst(acc) > 0) {
-        (fst(acc) - 1, snd(acc))
-      } else {
-        (0, List.append(snd(acc), [item]))
-      },
-    (n, []),
-    list
-  )
-  |> snd;
+let rec drop = (n, list) =>
+  switch (list, n) {
+  | ([], _) => []
+  | ([a], 0) => [a]
+  | ([_], _) => []
+  | ([_, ..._], 0) => list
+  | ([_, ...rest], i) => drop(i - 1, rest)
+  };
 
-let dropWhile = (predicate, list) =>
-  List.fold_left(
-    (acc, item) =>
-      if (fst(acc) && predicate(item)) {
-        (fst(acc), snd(acc))
-      } else {
-        (false, List.append(snd(acc), [item]))
-      },
-    (true, []),
-    list
-  )
-  |> snd;
+let rec dropWhile = (predicate, list) =>
+  switch list {
+  | [] => []
+  | [a] =>
+    if (predicate(a)) {
+      []
+    } else {
+      [a]
+    }
+  | [a, ...rest] =>
+    if (predicate(a)) {
+      dropWhile(predicate, rest)
+    } else {
+      list
+    }
+  };
 
 let take = (n, list) =>
   List.fold_left(
