@@ -248,25 +248,21 @@ let rec partitionAllPrivate = (n, i, list) =>
 
 let partitionAll = (n, list) => partitionAllPrivate(n, 1, list);
 
-let partitionBy = (fn, list) =>
+let rec partitionBy = (fn, list) =>
   switch list {
   | [] => []
-  | [_, ..._] =>
-    let (_, r, value) =
-      List.fold_left(
-        (acc, item) => {
-          let (fnValue, remainder, partitions) = acc;
-          let newFnValue = fn(item);
-          if (fnValue == newFnValue) {
-            (newFnValue, List.append(remainder, [item]), partitions)
-          } else {
-            (newFnValue, [item], List.append(partitions, [remainder]))
-          }
-        },
-        (fn(List.hd(list)), [List.hd(list)], []),
-        rest(list)
-      );
-    List.append(value, [r])
+  | [a] => [[a]]
+  | [a, ...rest] =>
+    let tmp = partitionBy(fn, rest);
+    switch tmp {
+    | [] => [[a]]
+    | [b, ...rem] =>
+      if (fn(a) == fn(List.hd(b))) {
+        List.append([List.append([a], b)], rem)
+      } else {
+        List.append([[a]], tmp)
+      }
+    }
   };
 
 let second = (list) =>
