@@ -98,31 +98,41 @@ let rec dropWhile = (predicate, list) =>
     }
   };
 
-let take = (n, list) =>
-  List.fold_left(
-    (acc, item) =>
-      if (fst(acc) > 0) {
-        (fst(acc) - 1, List.append(snd(acc), [item]))
-      } else {
-        (0, snd(acc))
-      },
-    (n, []),
-    list
-  )
-  |> snd;
+let rec take = (n, list) =>
+  switch list {
+  | [] => []
+  | [a] =>
+    if (n > 0) {
+      [a]
+    } else {
+      []
+    }
+  | [a, ...rest] =>
+    if (n > 0) {
+      List.append([a], take(n - 1, rest))
+    } else {
+      []
+    }
+  };
 
-let takeNth = (n, list) =>
-  List.fold_left(
-    (acc, item) =>
-      if (fst(acc) mod n == 0) {
-        (fst(acc) + 1, List.append(snd(acc), [item]))
-      } else {
-        (fst(acc) + 1, snd(acc))
-      },
-    (n, []),
-    list
-  )
-  |> snd;
+let rec takeNthPrivate = (n, i, list) =>
+  switch list {
+  | [] => []
+  | [a] =>
+    if (i mod n == 0) {
+      [a]
+    } else {
+      []
+    }
+  | [a, ...rest] =>
+    if (i mod n == 0) {
+      List.append([a], takeNthPrivate(n, i + 1, rest))
+    } else {
+      takeNthPrivate(n, i + 1, rest)
+    }
+  };
+
+let takeNth = (n, list) => takeNthPrivate(n, 0, list);
 
 let takeWhile = (predicate, list) =>
   List.fold_left(
