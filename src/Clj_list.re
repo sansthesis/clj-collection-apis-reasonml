@@ -19,18 +19,25 @@ let next = (list) =>
 
 let cons = (item, list) => List.append([item], list);
 
+let rec distinctPrivate = (cache, list) =>
+  switch list {
+  | [] => []
+  | [a] =>
+    if (List.mem(a, cache)) {
+      []
+    } else {
+      [a]
+    }
+  | [a, ...rest] =>
+    if (List.mem(a, cache)) {
+      distinctPrivate(cache, rest)
+    } else {
+      List.append([a], distinctPrivate(List.append([a], cache), rest))
+    }
+  };
+
 /* O(n^2) runtime :-( https://github.com/jasonrose/clj-collection-apis-reasonml/issues/1 */
-let distinct = (list) =>
-  List.fold_left(
-    (acc, item) =>
-      if (List.mem(item, acc)) {
-        acc
-      } else {
-        List.append(acc, [item])
-      },
-    [],
-    list
-  );
+let distinct = (list) => distinctPrivate([], list);
 
 let rec remove = (predicate, list) =>
   switch list {
