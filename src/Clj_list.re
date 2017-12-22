@@ -327,28 +327,16 @@ let rec range = (start, _end) =>
     List.append([start], range(start + 1, _end))
   };
 
-let dedupe = (list) =>
+let rec dedupe = (list) =>
   switch list {
   | [] => []
   | [a] => [a]
   | [a, ...rest] =>
-    let (lastItemInArray, itemLastInserted, arr) =
-      List.fold_left(
-        (acc, item) => {
-          let (current, _, arr) = acc;
-          if (current == item) {
-            acc
-          } else {
-            (item, current, List.append(arr, [current]))
-          }
-        },
-        (a, a, []),
-        rest
-      );
-    if (lastItemInArray == itemLastInserted) {
-      arr
+    let next = dedupe(rest);
+    if (a == List.hd(next)) {
+      next
     } else {
-      List.append(arr, [lastItemInArray])
+      List.append([a], next)
     }
   };
 
