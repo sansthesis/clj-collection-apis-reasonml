@@ -134,18 +134,22 @@ let rec takeNthPrivate = (n, i, list) =>
 
 let takeNth = (n, list) => takeNthPrivate(n, 0, list);
 
-let takeWhile = (predicate, list) =>
-  List.fold_left(
-    (acc, item) =>
-      if (fst(acc) && predicate(item)) {
-        (true, List.append(snd(acc), [item]))
-      } else {
-        (false, snd(acc))
-      },
-    (true, []),
-    list
-  )
-  |> snd;
+let rec takeWhile = (predicate, list) =>
+  switch list {
+  | [] => []
+  | [a] =>
+    if (predicate(a)) {
+      [a]
+    } else {
+      []
+    }
+  | [a, ...rest] =>
+    if (predicate(a)) {
+      List.append([a], takeWhile(predicate, rest))
+    } else {
+      []
+    }
+  };
 
 let rec butLast = (list) =>
   switch list {
