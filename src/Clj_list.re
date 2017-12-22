@@ -200,40 +200,53 @@ let splitWith = (predicate, list) => [
   dropWhile(predicate, list)
 ];
 
-let partition = (n, list) => {
-  let (_, _, output) =
-    List.fold_left(
-      (acc, item) => {
-        let (remainder, remainderSize, partitions) = acc;
-        if (remainderSize == n - 1) {
-          ([], 0, List.append(partitions, [List.append(remainder, [item])]))
-        } else {
-          (List.append(remainder, [item]), remainderSize + 1, partitions)
-        }
-      },
-      ([], 0, []),
-      list
-    );
-  output
-};
+let rec partitionPrivate = (n, i, list) =>
+  switch list {
+  | [] => []
+  | [a] =>
+    if (i mod n == 0) {
+      [[a]]
+    } else {
+      []
+    }
+  | [a, ...rest] =>
+    let tmp = partitionPrivate(n, i + 1, rest);
+    switch tmp {
+    | [] =>
+      if (i mod n == 0) {
+        [[a]]
+      } else {
+        []
+      }
+    | [b, ...rem] =>
+      if (i mod n == 0) {
+        List.append([[a]], tmp)
+      } else {
+        List.append([List.append([a], b)], rem)
+      }
+    }
+  };
 
-let partitionAll = (n, list) => {
-  let (remainder, partitions) =
-    List.fold_left(
-      (acc, item) =>
-        if (acc |> fst |> List.length == n - 1) {
-          ([], List.append(snd(acc), [List.append(fst(acc), [item])]))
-        } else {
-          (List.append(fst(acc), [item]), snd(acc))
-        },
-      ([], []),
-      list
-    );
-  switch remainder {
-  | [] => partitions
-  | _ => List.append(partitions, [remainder])
-  }
-};
+let partition = (n, list) => partitionPrivate(n, 1, list);
+
+let rec partitionAllPrivate = (n, i, list) =>
+  switch list {
+  | [] => []
+  | [a] => [[a]]
+  | [a, ...rest] =>
+    let tmp = partitionAllPrivate(n, i + 1, rest);
+    switch tmp {
+    | [] => [[a]]
+    | [b, ...rem] =>
+      if (i mod n == 0) {
+        List.append([[a]], tmp)
+      } else {
+        List.append([List.append([a], b)], rem)
+      }
+    }
+  };
+
+let partitionAll = (n, list) => partitionAllPrivate(n, 1, list);
 
 let partitionBy = (fn, list) =>
   switch list {
