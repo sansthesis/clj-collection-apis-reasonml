@@ -268,24 +268,29 @@ let notEmpty = (list) =>
   | _ => Some(list)
   };
 
-let some = (predicate, list) =>
-  List.fold_left(
-    (acc, item) =>
-      switch acc {
-      | Some(x) => Some(x)
-      | None =>
-        if (predicate(item)) {
-          Some(item)
-        } else {
-          None
-        }
-      },
-    None,
-    list
-  );
+let rec some = (predicate, list) =>
+  switch list {
+  | [] => None
+  | [a] =>
+    if (predicate(a)) {
+      Some(a)
+    } else {
+      None
+    }
+  | [a, ...rest] =>
+    if (predicate(a)) {
+      Some(a)
+    } else {
+      some(predicate, rest)
+    }
+  };
 
-let every = (predicate, list) =>
-  List.fold_left((acc, item) => acc && predicate(item), true, list);
+let rec every = (predicate, list) =>
+  switch list {
+  | [] => true
+  | [a] => predicate(a)
+  | [a, ...rest] => predicate(a) && every(predicate, rest)
+  };
 
 let notEvery = (predicate, list) => ! every(predicate, list);
 
