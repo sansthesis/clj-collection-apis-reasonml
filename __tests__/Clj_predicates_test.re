@@ -83,6 +83,43 @@ let () =
             }
           )
         }
+      );
+      describe(
+        "nil",
+        () => {
+          test(
+            "should return true if the value is None",
+            () => expect(None |> Clj_predicates.nil) |> toEqual(true)
+          );
+          test(
+            "should return false if the integer is greater than or equal to zero",
+            () => {
+              expect(Some(None) |> Clj_predicates.nil)
+              |> toEqual(false)
+              |> ignore;
+              expect(Some("hello") |> Clj_predicates.nil) |> toEqual(false)
+            }
+          )
+        }
+      );
+      describe(
+        "pos",
+        () => {
+          test(
+            "should return true if the integer is greater than than zero",
+            () => {
+              expect(1 |> Clj_predicates.pos) |> toEqual(true) |> ignore;
+              expect(401023 |> Clj_predicates.pos) |> toEqual(true)
+            }
+          );
+          test(
+            "should return false if the integer is less than or equal to zero",
+            () => {
+              expect(0 |> Clj_predicates.pos) |> toEqual(false) |> ignore;
+              expect((-401) |> Clj_predicates.pos) |> toEqual(false)
+            }
+          )
+        }
       )
     }
   );
