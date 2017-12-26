@@ -1,5 +1,7 @@
 {
   "name": "clj-collection-apis-reasonml",
+  "description": "Adding common functions from Clojure to Reason",
+  "homepage": "https://github.com/jasonrose/clj-collection-apis-reasonml",
   "version": "0.7.0",
   "scripts": {
     "build": "bsb -make-world",
@@ -11,6 +13,7 @@
   "keywords": [
     "BuckleScript",
     "Clojurescript",
+    "Clojure",
     "Reason",
     "ReasonML"
   ],
@@ -18,6 +21,7 @@
   "author": "Jason Rose <jasoncrose@gmail.com>",
   "license": "MIT",
   "repository": "jasonrose/clj-collection-apis-reasonml",
+  "bugs": "https://github.com/jasonrose/clj-collection-apis-reasonml/issues",
   "devDependencies": {
     "bs-jest": "0.2.0",
     "bs-platform": "2.1.0"
