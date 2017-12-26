@@ -106,7 +106,7 @@ let () =
         "pos",
         () => {
           test(
-            "should return true if the integer is greater than than zero",
+            "should return true if the integer is greater than zero",
             () => {
               expect(1 |> Clj_predicates.pos) |> toEqual(true) |> ignore;
               expect(401023 |> Clj_predicates.pos) |> toEqual(true)
@@ -135,6 +135,22 @@ let () =
               |> toEqual(true)
               |> ignore;
               expect(Some("hello") |> Clj_predicates.some) |> toEqual(true)
+            }
+          )
+        }
+      );
+      describe(
+        "zero",
+        () => {
+          test(
+            "should return true if the integer is 0",
+            () => expect(0 |> Clj_predicates.zero) |> toEqual(true)
+          );
+          test(
+            "should return false if the integer is less than or equal to zero",
+            () => {
+              expect(1 |> Clj_predicates.zero) |> toEqual(false) |> ignore;
+              expect((-401) |> Clj_predicates.zero) |> toEqual(false)
             }
           )
         }

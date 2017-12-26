@@ -27,7 +27,7 @@ let myVal = Clj.Array.drop(2, [|1, 2, 3|]);
 /* myVal is now [|3|] */
 ```
 
-## API Reference
+## Collections API Reference
 
 `Clj.Array` and `Clj.List` have the same APIs in almost every case.  The only exceptions are when a function already exists in the standard lib with the same name, parameters, and semantics.
 
@@ -135,3 +135,31 @@ Adds an element to the end of the source array.  Adds an element to the start of
 
 ### [contains](https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/contains?)
 Returns `true` if `index` is within the bounds of the source array or list.  Otherwise returns `false`.
+
+## Predicates API Reference
+
+`Clj.Predicates` is a set of unary functions that return booleans.  They are useful to pass into other functions like `Clj.Array.filter` or `Clj.List.notEvery`.
+
+### [even](https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/even?)
+Returns `true` if the integer is evenly divisible by `0`.  Returns `false` otherwise.
+
+### [odd](https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/odd?)
+Returns `true` if the integer is not evenly divisible by `0`.  Returns `true` otherwise.
+
+### [any](https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/any?)
+Always returns `true` regardless of what the input is.
+
+### [neg](https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/neg?)
+Returns `true` if the integer is less than zero.  Returns `false` otherwise.
+
+### [nil](https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/nil?)
+Returns `true` if the input is `None`.  Returns `false` otherwise.
+
+### [pos](https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/pos?)
+Returns `true` if the integer is greater than zero.  Returns `false` otherwise.
+
+### [some](https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/some?)
+Returns `false` if the input is `None`.  Returns `true` otherwise.
+
+### [zero](https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/zero?)
+Returns `true` if the number is `0`.  Returns `false` otherwise.

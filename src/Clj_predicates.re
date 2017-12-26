@@ -19,3 +19,5 @@ let some = (a) =>
   | None => false
   | Some(_) => true
   };
+
+let zero = (n) => n == 0;
