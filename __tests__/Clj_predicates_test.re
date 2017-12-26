@@ -92,7 +92,7 @@ let () =
             () => expect(None |> Clj_predicates.nil) |> toEqual(true)
           );
           test(
-            "should return false if the integer is greater than or equal to zero",
+            "should return false if the value is not None",
             () => {
               expect(Some(None) |> Clj_predicates.nil)
               |> toEqual(false)
@@ -117,6 +117,24 @@ let () =
             () => {
               expect(0 |> Clj_predicates.pos) |> toEqual(false) |> ignore;
               expect((-401) |> Clj_predicates.pos) |> toEqual(false)
+            }
+          )
+        }
+      );
+      describe(
+        "some",
+        () => {
+          test(
+            "should return false if the value is None",
+            () => expect(None |> Clj_predicates.some) |> toEqual(false)
+          );
+          test(
+            "should return true if the value is not None",
+            () => {
+              expect(Some(None) |> Clj_predicates.some)
+              |> toEqual(true)
+              |> ignore;
+              expect(Some("hello") |> Clj_predicates.some) |> toEqual(true)
             }
           )
         }

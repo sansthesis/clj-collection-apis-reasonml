@@ -13,3 +13,9 @@ let nil = (a) =>
   };
 
 let pos = (n) => n >= 0;
+
+let some = (a) =>
+  switch a {
+  | None => false
+  | Some(_) => true
+  };
