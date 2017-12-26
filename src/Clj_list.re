@@ -194,11 +194,29 @@ let reverse = List.rev;
 
 let splitAt = (index, list) => [take(index, list), drop(index, list)];
 
+let rec splitWithPrivate = (predicate, list) =>
+  switch list {
+  | [] => ([], [])
+  | [a] =>
+    if (predicate(a)) {
+      ([a], [])
+    } else {
+      ([], [a])
+    }
+  | [a, ...rest] =>
+    if (predicate(a)) {
+      let (takeL, dropL) = splitWithPrivate(predicate, rest);
+      (List.append([a], takeL), dropL)
+    } else {
+      ([], rest)
+    }
+  };
+
 /* Can be optimized to not run over the list twice https://github.com/jasonrose/clj-collection-apis-reasonml/issues/2 */
-let splitWith = (predicate, list) => [
-  takeWhile(predicate, list),
-  dropWhile(predicate, list)
-];
+let splitWith = (predicate, list) => {
+  let (t, d) = splitWithPrivate(predicate, list);
+  [t, d]
+};
 
 let rec partitionPrivate = (n, i, list) =>
   switch list {
