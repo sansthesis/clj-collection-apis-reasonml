@@ -759,17 +759,13 @@ let () =
         "conj",
         () => {
           test(
-            "should return an array of one element when given None",
-            () => expect(12 |> Clj_array.conj(None)) |> toEqual([|12|])
-          );
-          test(
             "should return an array of one element when given an empty array",
-            () => expect(12 |> Clj_array.conj(Some([||]))) |> toEqual([|12|])
+            () => expect(12 |> Clj_array.conj([||])) |> toEqual([|12|])
           );
           test(
             "should return add the item to the end of an existing array",
             () =>
-              expect(12 |> Clj_array.conj(Some([|3, 4, 10|])))
+              expect(12 |> Clj_array.conj([|3, 4, 10|]))
               |> toEqual([|3, 4, 10, 12|])
           )
         }

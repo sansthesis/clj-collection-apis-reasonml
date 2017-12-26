@@ -208,7 +208,7 @@ let rec splitWithPrivate = (predicate, list) =>
       let (takeL, dropL) = splitWithPrivate(predicate, rest);
       (List.append([a], takeL), dropL)
     } else {
-      ([], rest)
+      ([], list)
     }
   };
 
@@ -384,11 +384,7 @@ let rec dedupe = (list) =>
     }
   };
 
-let conj = (list, item) =>
-  switch list {
-  | None => [item]
-  | Some(l) => List.append([item], l)
-  };
+let conj = (list, item) => List.append([item], list);
 
 let rec contains = (list, index) =>
   switch (list, index) {

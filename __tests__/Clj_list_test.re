@@ -380,7 +380,8 @@ let () =
           test(
             "should split as much prefix where the predicate is true into the first list and the rest into the second list",
             () =>
-              expect([2, 1] |> Clj_list.splitWith(even)) |> toEqual([[2], [1]])
+              expect([2, 1, 2] |> Clj_list.splitWith(even))
+              |> toEqual([[2], [1, 2]])
           )
         }
       );
@@ -705,17 +706,13 @@ let () =
         "conj",
         () => {
           test(
-            "should return an list of one element when given None",
-            () => expect(12 |> Clj_list.conj(None)) |> toEqual([12])
-          );
-          test(
             "should return an list of one element when given an empty list",
-            () => expect(12 |> Clj_list.conj(Some([]))) |> toEqual([12])
+            () => expect(12 |> Clj_list.conj([])) |> toEqual([12])
           );
           test(
             "should return add the item to the beginning of an existing list",
             () =>
-              expect(12 |> Clj_list.conj(Some([3, 4, 10])))
+              expect(12 |> Clj_list.conj([3, 4, 10]))
               |> toEqual([12, 3, 4, 10])
           )
         }

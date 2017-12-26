@@ -336,10 +336,6 @@ let dedupe = (array) =>
     }
   };
 
-let conj = (array, item) =>
-  switch array {
-  | None => [|item|]
-  | Some(arr) => Array.append(arr, [|item|])
-  };
+let conj = (array, item) => Array.append(array, [|item|]);
 
 let contains = (array, index) => index >= 0 && index < Array.length(array);
