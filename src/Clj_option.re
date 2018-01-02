@@ -1,4 +1,4 @@
-let filter = (predicate, o: option('a)) =>
+let filter = (predicate, o) =>
   switch o {
   | None => None
   | Some(x) =>
@@ -7,4 +7,10 @@ let filter = (predicate, o: option('a)) =>
     } else {
       None
     }
+  };
+
+let isEmpty = (o) =>
+  switch o {
+  | None => true
+  | Some(_) => false
   };
