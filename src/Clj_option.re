@@ -20,3 +20,9 @@ let map = (fn, o) =>
   | None => None
   | Some(x) => Some(fn(x))
   };
+
+let nonEmpty = (o) =>
+  switch o {
+  | None => false
+  | Some(_) => true
+  };

@@ -53,6 +53,19 @@ let () =
             () => expect(Some(2) |> Clj_option.map(inc)) |> toEqual(Some(3))
           )
         }
+      );
+      describe(
+        "nonEmpty",
+        () => {
+          test(
+            "should return false when given None",
+            () => expect(None |> Clj_option.nonEmpty) |> toEqual(false)
+          );
+          test(
+            "should return true when given Some(o)",
+            () => expect(Some(2) |> Clj_option.nonEmpty) |> toEqual(true)
+          )
+        }
       )
     }
   );
