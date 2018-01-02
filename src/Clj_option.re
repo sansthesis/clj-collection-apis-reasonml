@@ -26,3 +26,9 @@ let nonEmpty = (o) =>
   | None => false
   | Some(_) => true
   };
+
+let getOrElse = (default, o) =>
+  switch o {
+  | None => default
+  | Some(x) => x
+  };

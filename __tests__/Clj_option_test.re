@@ -66,6 +66,20 @@ let () =
             () => expect(Some(2) |> Clj_option.nonEmpty) |> toEqual(true)
           )
         }
+      );
+      describe(
+        "getOrElse",
+        () => {
+          test(
+            "should return the default when given None",
+            () =>
+              expect(None |> Clj_option.getOrElse("hello")) |> toEqual("hello")
+          );
+          test(
+            "should return o when given Some(o)",
+            () => expect(Some(2) |> Clj_option.getOrElse(11)) |> toEqual(2)
+          )
+        }
       )
     }
   );
