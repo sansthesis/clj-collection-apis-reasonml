@@ -135,3 +135,22 @@ Returns `false` if the input is `None`.  Returns `true` otherwise.
 
 ### [zero](https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/zero?)
 Returns `true` if the number is `0`.  Returns `false` otherwise.
+
+## Option API Reference
+
+`Clj.Option` is a set of functions that make working with `option` types easier.  The API is based on Scala's.  Unlike Bucklescript's `Js.Option` library, these will work in native contexts.
+
+### [filter](<https://www.scala-lang.org/api/2.12.3/scala/Option.html#filter(p:A=%3EBoolean):Option[A]>)
+Return `Some(a)` if both `a` is not `None` and `predicate(a)` returns `true`.  Returns `None` otherwise.
+
+### [isEmpty](<https://www.scala-lang.org/api/2.12.3/scala/Option.html#isEmpty:Boolean>)
+Returns `true` if `a` is `None`.  Returns `false` otherwise.
+
+### [map](<https://www.scala-lang.org/api/2.12.3/scala/Option.html#map[B](f:A=%3EB):Option[B]>)
+Returns `Some(fn(a))` if `a` is not `None`.  Returns `None` otherwise.
+
+### [nonEmpty](<https://www.scala-lang.org/api/2.12.3/scala/Option.html#nonEmpty:Boolean>)
+Returns `true` if `a` is not `None`.  Returns `false` otherwise.
+
+### [getOrElse](<https://www.scala-lang.org/api/2.12.3/scala/Option.html#getOrElse[B%3E:A](default:=%3EB):B>)
+Returns `a` if `a` is not `None`.  Returns `b` if `a` is `None`.
