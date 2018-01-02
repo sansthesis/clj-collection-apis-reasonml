@@ -2,6 +2,8 @@
 
 This project aims to implement the Clojure collection APIs for Reason's Array and List types whenever they make sense.
 
+In addition, it provides ports of many of Clojure's predicates such as `even?` and the non-collection API of Scala's `Option` type.
+
 Reference the unit tests for examples on usage.
 
 
