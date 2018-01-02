@@ -4,7 +4,7 @@ open Expect;
 
 let even = (a) => a mod 2 == 0;
 
-let identity = (a) => a;
+let inc = (a) => a + 1;
 
 let () =
   describe(
@@ -38,6 +38,19 @@ let () =
           test(
             "should return false when given Some(o)",
             () => expect(Some(2) |> Clj_option.isEmpty) |> toEqual(false)
+          )
+        }
+      );
+      describe(
+        "map",
+        () => {
+          test(
+            "should return None when given None",
+            () => expect(None |> Clj_option.map(inc)) |> toEqual(None)
+          );
+          test(
+            "should return Some(fn(o)) when given Some(o)",
+            () => expect(Some(2) |> Clj_option.map(inc)) |> toEqual(Some(3))
           )
         }
       )

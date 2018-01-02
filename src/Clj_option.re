@@ -14,3 +14,9 @@ let isEmpty = (o) =>
   | None => true
   | Some(_) => false
   };
+
+let map = (fn, o) =>
+  switch o {
+  | None => None
+  | Some(x) => Some(fn(x))
+  };
